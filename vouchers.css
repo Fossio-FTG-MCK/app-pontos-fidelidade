@@ -1,0 +1,623 @@
+
+:root {
+    --dark-blue: #1A2634;
+    --gold: #C0A060;
+    --white: #FFFFFF;
+    --dark-gray: #2A2E35;
+    --light-gray: #F5F5F5;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --radius: 8px;
+    --spacing: 16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    min-height: 100vh;
+}
+
+#app {
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+/* Section Styles */
+section {
+    display: none;
+}
+
+.active-section {
+    display: block;
+}
+
+/* Header */
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--dark-blue);
+    padding: 5px;
+    cursor: pointer;
+}
+
+.section-title {
+    flex: 1;
+    font-size: 1.5rem;
+    color: var(--dark-blue);
+    text-align: center;
+}
+
+/* My Points */
+.my-points-box {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    padding: 15px;
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    margin: 0 auto 20px auto;
+    height: 10vh;
+}
+
+.my-points-box .label {
+    font-size: 1.1rem;
+}
+
+.my-points-box .value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+/* Vouchers Content */
+.vouchers-content {
+    text-align: center;
+    padding: 30px 0;
+    height: 20vh;
+}
+
+.vouchers-content h3 {
+    font-size: 1.4rem;
+    color: var(--dark-blue);
+    margin-bottom: 25px;
+    font-weight: bold;
+}
+
+.vouchers-content .empty-message {
+    margin-bottom: 15px;
+}
+
+.vouchers-content .empty-message strong {
+    color: #dc3545;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+}
+
+.vouchers-content .suggestion-text {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    padding: 0 20px;
+}
+
+/* Partners Scroll */
+.partners-scroll-section {
+    margin: 30px 0;
+    height: 15vh;
+}
+
+.partners-scroll-section h4 {
+    color: var(--dark-blue);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    text-align: left;
+    padding-left: 10px;
+}
+
+@media (max-width: 768px) {
+    .partners-scroll-section h4 {
+        margin-top: 10px;
+    }
+}
+
+.partners-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 0 10px 10px 10px;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+}
+
+.partners-scroll::after {
+    content: "›";
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: var(--dark-blue);
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.partner-icon {
+    min-width: 20%;
+    height: 80px;
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: var(--shadow);
+}
+
+.partner-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Botão de Vouchers Finalizados */
+.btn-finished-vouchers {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    border: none;
+    padding: 14px 0;
+    border-radius: 25px;
+    width: 80%;
+    margin: 20px auto;
+    display: block;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    left: 10%;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 100;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    padding: 20px;
+    width: 80%;
+    max-width: 400px;
+    position: relative;
+}
+
+#modal-message {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    border: none;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: #263a4d;
+}
+
+.btn-secondary {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+    border: 1px solid #ddd;
+    padding: 12px 20px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 10px;
+}
+
+.card {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: var(--spacing);
+    margin-bottom: var(--spacing);
+}
+
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: var(--dark-gray);
+    font-weight: 500;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: var(--radius);
+    font-size: 1rem;
+}
+
+/* Partner Profile */
+.partner-profile-content {
+    margin-bottom: 70px;
+}
+
+.partner-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    background-color: var(--white);
+    border-radius: var(--radius);
+    padding: 15px;
+    box-shadow: var(--shadow);
+}
+
+.partner-header .partner-logo {
+    width: 70px;
+    height: 70px;
+    margin-right: 15px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.partner-header .partner-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.partner-title h3 {
+    font-size: 1.2rem;
+    color: var(--dark-blue);
+    margin: 0 0 5px 0;
+}
+
+.partner-banner {
+    width: 100%;
+    height: 150px;
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+.partner-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.partner-details {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+}
+
+.partner-description {
+    margin-bottom: 20px;
+    line-height: 1.5;
+    color: #444;
+}
+
+.partner-contact-info {
+    margin-bottom: 20px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.contact-item i {
+    width: 25px;
+    color: var(--dark-blue);
+    margin-right: 10px;
+}
+
+.contact-item span {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.partner-social {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.social-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--dark-blue);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.social-icon:hover {
+    background-color: var(--gold);
+}
+
+/* Finished Vouchers Side Menu */
+
+.finished-vouchers-sidemenu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 80%;
+    max-width: 320px;
+    height: 100%;
+    background-color: var(--white);
+    z-index: 1000;
+    transition: right 0.3s ease-in-out;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+.finished-vouchers-sidemenu.active {
+    right: 0;
+}
+
+.finished-vouchers-header {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.finished-vouchers-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.close-finished-vouchers {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.finished-vouchers-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 16px;
+}
+
+.finished-vouchers-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.finished-vouchers-overlay.active {
+    display: block;
+}
+
+
+.finished-vouchers-header {
+    background-color: var(--dark-blue);
+    color: var(--white);
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.finished-vouchers-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.close-finished-vouchers {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--white);
+}
+
+.finished-vouchers-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.finished-vouchers-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
+}
+
+.finished-vouchers-overlay.active {
+    display: block;
+}
+
+
+
+.finished-voucher-item {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.voucher-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.voucher-header h4 {
+    margin: 0;
+    color: var(--dark-blue);
+    font-size: 1rem;
+}
+
+.voucher-date {
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.voucher-details {
+    position: relative;
+}
+
+.voucher-details p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.voucher-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 5px;
+}
+
+.status-used {
+    background-color: #e6f4ea;
+    color: #34a853;
+}
+
+.status-expired {
+    background-color: #feeae6;
+    color: #ea4335;
+}
+
+.vouchers-content {
+    padding: 30px 20px 60px 20px; /* aumentei padding inferior */
+    text-align: center;
+}
+
+.partners-scroll-section {
+    margin-top: 0;
+    padding-top: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.partners-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    padding: 0 10px 10px 10px;
+    -webkit-overflow-scrolling: touch;
+    position: relative;
+    scrollbar-width: none; /* Firefox */
+}
+
+.partners-scroll::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+
+.voucher-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.voucher-item {
+    background-color: var(--white);
+    border-radius: var(--radius);
+    padding: 15px;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.voucher-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--dark-blue);
+    margin-top: 10px;
+}
+
+.voucher-points {
+    color: var(--gold);
+    font-weight: bold;
+}

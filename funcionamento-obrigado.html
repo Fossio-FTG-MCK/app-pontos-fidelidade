@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Explicação Técnica - Página Obrigado</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+    header {
+      background-color: #162231;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 5px solid #d0a95f;
+    }
+    header img {
+      width: 50px;
+      height: 50px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+    main {
+      max-width: 960px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #162231;
+    }
+    p {
+      line-height: 1.6;
+      color: #333;
+    }
+    code {
+      display: block;
+      background: #f0f0f0;
+      padding: 12px;
+      margin: 12px 0;
+      border-radius: 6px;
+      font-size: 0.95rem;
+      white-space: pre-wrap;
+    }
+    .highlight {
+      background-color: #162231;
+      color: #d0a95f;
+      font-weight: bold;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://kpjwznuthdnodfqgnidk.supabase.co/storage/v1/object/public/hotel-image//logo-hotel-real.png" alt="Logo Hotel Real" />
+    <h1>Funcionamento da Página Obrigado</h1>
+  </header>
+  <main>
+    <h2>Visão Geral</h2>
+    <p>Após a confirmação do pagamento, a página <span class="highlight">obrigado.html</span> recebe os dados da transação via parâmetros de URL e registra no back-end.</p>
+
+    <h2>Fluxo Automatizado</h2>
+    <p>Ao inserir o registro em <code>webhook_reservas</code>, uma função automática realiza as ações abaixo:</p>
+    <ul>
+      <li>Busca o usuário por e-mail</li>
+      <li>Cria a reserva em <code>reservas</code></li>
+      <li>Atualiza a suíte como <code>disponível = false</code></li>
+      <li>Consulta o fator e bônus da pontuação</li>
+      <li>Calcula e aplica os pontos</li>
+      <li>Registra o histórico da pontuação</li>
+    </ul>
+
+    <h2>Fórmula de Pontuação</h2>
+    <p>Com base nos fatores configurados em <code>configuracoes_pontuacao</code>, a fórmula aplicada é:</p>
+    <code>
+pontos_base := valor_total * fator;
+pontos_gerados := FLOOR(pontos_base * (1 + bonus_percent / 100));
+    </code>
+
+    <h2>Critérios</h2>
+    <p>O sistema considera a configuração de pontuação mais específica disponível (tipo de usuário + suíte). Se não encontrar, usa as genéricas (NULL).</p>
+  </main>
+</body>
+</html>

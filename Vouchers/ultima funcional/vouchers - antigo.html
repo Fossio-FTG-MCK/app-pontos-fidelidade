@@ -1,0 +1,123 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOTEL REAL CABO FRIO - Fidelidade</title>
+    <link rel="stylesheet" href="vouchers.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+
+            <section id="vouchers-section" class="active-section">
+                <div class="section-header">
+                    <button id="vouchers-back" class="back-button">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2 class="section-title">Vouchers</h2>
+                    <div style="width: 24px;"></div>
+                </div>
+                
+                <div class="my-points-box">
+                    <div class="label">Meus pontos</div>
+                    <div class="value" id="vouchers-points-value">0</div>
+                </div>
+                
+                <div class="vouchers-content">
+                    <h3>VOUCHERS</h3>
+                    <div class="empty-message">
+                        <strong>Que pena!</strong>
+                        Você não possui voucher válido.
+                    </div>
+                    <p class="suggestion-text">
+                        Conheça nossos parceiros e acumule pontos para resgatar benefícios exclusivos.
+                    </p>
+                </div>
+                
+                <div class="partners-scroll-section">
+                    <h4>Parceiros</h4>
+                    <div class="partners-scroll">
+                        <div class="partner-icon">
+                            <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Restaurante Praia Azul">
+                        </div>
+                        <div class="partner-icon">
+                            <img src="https://images.unsplash.com/photo-1520454974749-611b7248ffdb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Quiosque Pé na Areia">
+                        </div>
+                        <div class="partner-icon">
+                            <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Bar do Mar">
+                        </div>
+                        <div class="partner-icon">
+                            <img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Shopping Cabo Mall">
+                        </div>
+                        <div class="partner-icon">
+                            <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Translado Executivo">
+                        </div>
+                        <div class="partner-icon">
+                            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Spa Oceano">
+                        </div>
+                    </div>
+                </div>
+                
+                <button class="btn-finished-vouchers">
+                    Exibir Vouchers finalizados
+                </button>
+            </section>
+
+            <!-- Finished Vouchers Side Menu -->
+            <div id="finished-vouchers-sidemenu" class="finished-vouchers-sidemenu">
+                <div class="finished-vouchers-header">
+                    <div class="finished-vouchers-title">Vouchers Finalizados</div>
+                    <div class="close-finished-vouchers" id="close-finished-vouchers">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+                <div class="finished-vouchers-content">
+                    <div id="finished-vouchers-list">
+                        <!-- Finished vouchers will be populated here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+            <div id="finished-vouchers-overlay" class="finished-vouchers-overlay"></div>
+
+            <section id="partner-profile-section">
+                <div class="section-header">
+                    <button id="partner-back" class="back-button">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2 class="section-title">Perfil do Parceiro</h2>
+                    <div style="width: 24px;"></div>
+                </div>
+                
+                <div id="partner-profile-content" class="partner-profile-content">
+                    <!-- Profile content will be filled dynamically -->
+                </div>
+            </section>
+
+            <section id="manual-points-section">
+                <div class="card">
+                    <h2>Adicionar Código</h2>
+                    <form id="code-form">
+                        <div class="input-group">
+                            <label for="reservation-code">Código da Reserva</label>
+                            <input type="text" id="reservation-code" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Validar</button>
+                        <button type="button" id="back-to-dashboard" class="btn-secondary">Voltar</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modal-message"></div>
+                <button id="modal-ok" class="btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+    <script src="vouchers.js"></script>
+    <script src="partners.js"></script>
+    <script src="partner-profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,623 @@
+<html lang="pt-BR">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   HOTEL REAL CABO FRIO - Meus dados
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+  <link href="meus-dados.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <div id="app">
+   <header>
+    <div class="menu-icon" id="menu-icon">
+     <i class="fas fa-bars">
+     </i>
+    </div>
+    <div class="logo">
+     <svg height="50" width="50">
+      <image height="50" href="https://kpjwznuthdnodfqgnidk.supabase.co/storage/v1/object/public/hotel-image//logo-hotel-real.png" width="50" x="0" y="0"/>
+     </svg>
+    </div>
+    <div class="notification-icon" id="notification-icon">
+     <i class="fas fa-bell">
+     </i>
+     <span class="notification-badge" style="display: none;">
+     </span>
+    </div>
+   </header>
+   <div class="side-menu" id="side-menu">
+    <div class="side-menu-header">
+     <div class="user-avatar">
+      <i class="fas fa-user">
+      </i>
+     </div>
+     <div class="side-menu-user-info">
+      <h3 id="menu-user-name">
+       Nome do Cliente
+      </h3>
+      <p id="menu-user-level">
+       N&iacute;vel: Bronze
+      </p>
+     </div>
+     <div class="close-menu" id="close-menu">
+      <i class="fas fa-times">
+      </i>
+     </div>
+    </div>
+    <div class="side-menu-items">
+     <a class="menu-item" href="index.html" id="menu-home">
+      <i class="fas fa-home">
+      </i>
+      <span>
+       In&iacute;cio
+      </span>
+     </a>
+     <a class="menu-item" href="#" id="menu-partners">
+      <i class="fas fa-store">
+      </i>
+      <span>
+       Parceiros
+      </span>
+     </a>
+     <a class="menu-item" href="vouchers.html" id="menu-vouchers">
+      <i class="fas fa-exchange-alt">
+      </i>
+      <span>
+       Vouchers
+      </span>
+     </a>
+     <a class="menu-item" href="compras.html" id="menu-shopping">
+      <i class="fas fa-shopping-cart">
+      </i>
+      <span>
+       Compras
+      </span>
+     </a>
+     <a class="menu-item" href="extrato.html" id="menu-statement">
+      <i class="fas fa-coins">
+      </i>
+      <span>
+       Extrato
+      </span>
+     </a>
+     <a class="menu-item" href="meus-dados.html" id="menu-profile">
+      <i class="fas fa-user">
+      </i>
+      <span>
+       Meus Dados
+      </span>
+     </a>
+     <a class="menu-item" href="features.html" id="menu-scan">
+      <i class="fas fa-qrcode">
+      </i>
+      <span>
+       Escanear
+      </span>
+     </a>
+     <a class="menu-item" href="contato.html" id="menu-contact">
+      <i class="fas fa-phone">
+      </i>
+      <span>
+       Contato
+      </span>
+     </a>
+     <a class="menu-item" href="ajuda.html" id="menu-help">
+      <i class="fas fa-question-circle">
+      </i>
+      <span>
+       Ajuda
+      </span>
+     </a>
+     <a class="menu-item" href="#" id="menu-logout">
+      <i class="fas fa-sign-out-alt">
+      </i>
+      <span>
+       Sair
+      </span>
+     </a>
+    </div>
+   </div>
+   <div class="menu-overlay" id="menu-overlay">
+   </div>
+   <!-- QR Code Scanner Modal -->
+   <main>
+    <section class="active-section" id="meus_dados-section">
+     <!-- INÍCIO DA NOVA TELA DE MEUS DADOS -->
+     <section class="active-section" id="profile-section">
+      <div class="section-header">
+       <a class="back-button" href="index.html">
+        <i class="fas fa-arrow-left">
+        </i>
+       </a>
+       <h2 class="section-title">
+        Meus Dados
+       </h2>
+       <div style="width: 24px;">
+       </div>
+      </div>
+      <div class="profile-header">
+       <h3 class="greeting" id="profile-greeting">
+        Ol&aacute;, Nome do Cliente!
+       </h3>
+       <p class="points-summary" id="profile-points">
+        Saldo: 0 pontos
+       </p>
+       <div class="qr-code" id="profile-qr-code">
+        <!-- QR code will be inserted here by JS -->
+       </div>
+      </div>
+      <div class="card profile-info-list">
+       <div class="profile-info-item">
+        <span class="profile-info-label">
+         Nome
+        </span>
+        <span class="profile-info-value" id="profile-name-value">
+         N&atilde;o informado
+        </span>
+       </div>
+       <div class="profile-info-item">
+        <span class="profile-info-label">
+         CPF
+        </span>
+        <span class="profile-info-value" id="profile-cpf-value">
+         ***.***-**
+        </span>
+       </div>
+       <div class="profile-info-item">
+        <span class="profile-info-label">
+         Data de Nascimento
+        </span>
+        <span class="profile-info-value" id="profile-birth-value">
+         N&atilde;o informado
+        </span>
+       </div>
+       <div class="profile-info-item">
+        <span class="profile-info-label">
+         Ocupa&ccedil;&atilde;o
+        </span>
+        <span class="profile-info-value" id="profile-occupation-value">
+         N&atilde;o informado
+        </span>
+       </div>
+       <div class="profile-info-item">
+        <span class="profile-info-label">
+         Telefone
+        </span>
+        <span class="profile-info-value" id="profile-phone-value">
+         N&atilde;o informado
+        </span>
+       </div>
+       <div class="profile-info-item">
+        <span class="profile-info-label">
+         E-mail
+        </span>
+        <span class="profile-info-value" id="profile-email-value">
+         N&atilde;o informado
+        </span>
+       </div>
+       <div class="profile-info-item">
+        <span class="profile-info-label">
+         Endere&ccedil;o
+        </span>
+        <span class="profile-info-value" id="profile-address-value">
+         N&atilde;o informado
+        </span>
+       </div>
+      </div>
+      <div class="card cards-section">
+       <h3>
+        Meus Cart&otilde;es
+       </h3>
+       <button class="add-card-btn" id="add-card-btn">
+        <i class="fas fa-plus-circle">
+        </i>
+        <span class="add-card-text">
+         Cart&atilde;o Abastecimento
+        </span>
+       </button>
+      </div>
+     </section>
+     <script src="Meus_Dados.js">
+     </script>
+     <!-- Modal de Adição de Cartão -->
+     <div class="modal" id="add-card-modal" style="display:none;">
+      <div class="modal-content">
+       <span class="close" id="close-add-card-modal">
+        &times;
+       </span>
+       <h3>
+        Adicionar Cart&atilde;o Abastecimento
+       </h3>
+       <p>
+        Digite o c&oacute;digo do cart&atilde;o para vincular &agrave; sua conta:
+       </p>
+       <form id="add-card-form">
+        <div class="input-group">
+         <input id="card-code" placeholder="INSERIR C&Oacute;DIGO" required="" type="text"/>
+        </div>
+        <button class="btn-primary" type="submit">
+         CONTINUAR
+        </button>
+       </form>
+      </div>
+     </div>
+     <!-- FIM DA NOVA TELA DE MEUS DADOS -->
+    </section>
+    <section id="login-section">
+     <div class="card">
+      <h2>
+       Programa de Fidelidade
+      </h2>
+      <p>
+       Acumule pontos e ganhe benef&iacute;cios exclusivos
+      </p>
+      <form id="login-form">
+       <div class="input-group">
+        <label for="email">
+         E-mail
+        </label>
+        <input id="email" required="" type="email"/>
+       </div>
+       <div class="input-group">
+        <label for="password">
+         Senha
+        </label>
+        <input id="password" required="" type="password"/>
+       </div>
+       <button class="btn-primary" type="submit">
+        Entrar
+       </button>
+      </form>
+      <p class="form-footer">
+       N&atilde;o tem uma conta?
+       <a href="#" id="show-register">
+        Cadastre-se
+       </a>
+      </p>
+     </div>
+    </section>
+    <section id="register-section">
+     <div class="card">
+      <h2>
+       Cadastre-se
+      </h2>
+      <p>
+       Junte-se ao programa de fidelidade
+      </p>
+      <form id="register-form">
+       <div class="input-group">
+        <label for="reg-name">
+         Nome Completo
+        </label>
+        <input id="reg-name" required="" type="text"/>
+       </div>
+       <div class="input-group">
+        <label for="reg-email">
+         E-mail
+        </label>
+        <input id="reg-email" required="" type="email"/>
+       </div>
+       <div class="input-group">
+        <label for="reg-phone">
+         Telefone
+        </label>
+        <input id="reg-phone" required="" type="tel"/>
+       </div>
+       <div class="input-group">
+        <label for="reg-password">
+         Senha
+        </label>
+        <input id="reg-password" required="" type="password"/>
+       </div>
+       <button class="btn-primary" type="submit">
+        Cadastrar
+       </button>
+      </form>
+      <p class="form-footer">
+       J&aacute; tem uma conta?
+       <a href="#" id="show-login">
+        Entrar
+       </a>
+      </p>
+     </div>
+    </section>
+    <section id="dashboard-section" style="display: none;">
+     <div class="profile-card">
+      <div class="user-info">
+       <div class="user-avatar">
+        <i class="fas fa-user">
+        </i>
+       </div>
+       <div>
+        <h3 id="user-name">
+         Nome do Cliente
+        </h3>
+        <p id="user-level">
+         N&iacute;vel: Bronze
+        </p>
+       </div>
+      </div>
+      <div class="points-display">
+       <div class="points-circle">
+        <span id="points-count">
+         0
+        </span>
+       </div>
+       <p>
+        Pontos acumulados
+       </p>
+      </div>
+     </div>
+     <div class="card">
+      <h2>
+       Adicionar Pontos
+      </h2>
+      <div class="add-points-options">
+       <button class="btn-action" id="scan-code-btn">
+        <i class="fas fa-qrcode">
+        </i>
+        Escanear C&oacute;digo
+       </button>
+       <button class="btn-action" id="manual-points-btn">
+        <i class="fas fa-plus-circle">
+        </i>
+        Adicionar C&oacute;digo
+       </button>
+       <button class="btn-action" id="add-reservation-btn">
+        <i class="fas fa-calendar-plus">
+        </i>
+        Nova Reserva
+       </button>
+      </div>
+     </div>
+     <div class="card">
+      <h2>
+       Hist&oacute;rico de Pontos
+      </h2>
+      <div class="history-list" id="points-history">
+       <!-- Histórico será preenchido pelo JavaScript -->
+      </div>
+     </div>
+     <div class="card">
+      <h2>
+       Benef&iacute;cios
+      </h2>
+      <i class="fas fa-hotel hotel-icon" id="hotel-site-link" style="color: blue;" title="Visitar o site do hotel">
+      </i>
+      <div class="tabs">
+       <div class="tab" id="tab-features">
+        Destaques
+       </div>
+       <div class="tab" id="tab-reservations">
+        Minhas Reservas
+       </div>
+       <div class="tab" id="tab-benefits">
+        Benef&iacute;cios
+       </div>
+      </div>
+      <div class="tab-content" id="content-features">
+       <!-- Features content will be filled by JavaScript -->
+      </div>
+      <div class="tab-content" id="content-reservations">
+       <div class="reservation-list" id="reservations-list">
+        <!-- Reservations will be filled by JavaScript -->
+       </div>
+      </div>
+      <div class="tab-content" id="content-benefits">
+       <div class="benefits-list">
+        <div class="benefit-item">
+         <div class="benefit-icon">
+          <i class="fas fa-coffee">
+          </i>
+         </div>
+         <div class="benefit-info">
+          <h4>
+           Caf&eacute; da manh&atilde; exclusivo
+          </h4>
+          <p>
+           500 pontos
+          </p>
+         </div>
+         <button class="btn-redeem" data-points="500">
+          Resgatar
+         </button>
+        </div>
+        <div class="benefit-item">
+         <div class="benefit-icon">
+          <i class="fas fa-bed">
+          </i>
+         </div>
+         <div class="benefit-info">
+          <h4>
+           Upgrade de quarto
+          </h4>
+          <p>
+           1000 pontos
+          </p>
+         </div>
+         <button class="btn-redeem" data-points="1000">
+          Resgatar
+         </button>
+        </div>
+        <div class="benefit-item">
+         <div class="benefit-icon">
+          <i class="fas fa-concierge-bell">
+          </i>
+         </div>
+         <div class="benefit-info">
+          <h4>
+           Jantar Especial
+          </h4>
+          <p>
+           1500 pontos
+          </p>
+         </div>
+         <button class="btn-redeem" data-points="1500">
+          Resgatar
+         </button>
+        </div>
+       </div>
+      </div>
+     </div>
+    </section>
+    <section id="manual-points-section">
+     <div class="card">
+      <h2>
+       Adicionar C&oacute;digo
+      </h2>
+      <form id="code-form">
+       <div class="input-group">
+        <label for="reservation-code">
+         C&oacute;digo da Reserva
+        </label>
+        <input id="reservation-code" required="" type="text"/>
+       </div>
+       <button class="btn-primary" type="submit">
+        Validar
+       </button>
+       <button class="btn-secondary" id="back-to-dashboard" type="button">
+        Voltar
+       </button>
+      </form>
+     </div>
+    </section>
+    <section id="add-reservation-section">
+     <div class="card">
+      <h2>
+       Adicionar Nova Reserva (Administrador)
+      </h2>
+      <form id="reservation-form">
+       <div class="input-group">
+        <label for="reservation-client">
+         Cliente
+        </label>
+        <select class="select-input" id="reservation-client" required="">
+         <option value="">
+          Selecione um cliente
+         </option>
+         <!-- Will be populated dynamically -->
+        </select>
+       </div>
+       <div class="input-group">
+        <label for="reservation-checkin">
+         Data de Check-in
+        </label>
+        <input class="date-input" id="reservation-checkin" required="" type="date"/>
+       </div>
+       <div class="input-group">
+        <label for="reservation-checkout">
+         Data de Check-out
+        </label>
+        <input class="date-input" id="reservation-checkout" required="" type="date"/>
+       </div>
+       <div class="input-group">
+        <label for="reservation-time">
+         Hor&aacute;rio de Check-in
+        </label>
+        <select class="select-input" id="reservation-time" required="">
+         <option value="">
+          Selecione um hor&aacute;rio
+         </option>
+         <option value="10:00">
+          10:00
+         </option>
+         <option value="11:00">
+          11:00
+         </option>
+         <option value="12:00">
+          12:00
+         </option>
+         <option value="13:00">
+          13:00
+         </option>
+         <option value="14:00">
+          14:00
+         </option>
+         <option value="15:00">
+          15:00
+         </option>
+         <option value="16:00">
+          16:00
+         </option>
+         <option value="17:00">
+          17:00
+         </option>
+         <option value="18:00">
+          18:00
+         </option>
+        </select>
+       </div>
+       <div class="input-group">
+        <label for="reservation-room">
+         Tipo de Quarto
+        </label>
+        <select class="select-input" id="reservation-room" required="">
+         <option value="">
+          Selecione um tipo de quarto
+         </option>
+         <option value="Su&iacute;te Master com Vista para o Mar">
+          Su&iacute;te Master com Vista para o Mar
+         </option>
+         <option value="Quarto Luxo Duplo">
+          Quarto Luxo Duplo
+         </option>
+         <option value="Su&iacute;te Fam&iacute;lia">
+          Su&iacute;te Fam&iacute;lia
+         </option>
+         <option value="Quarto Standard">
+          Quarto Standard
+         </option>
+        </select>
+       </div>
+       <button class="btn-primary" type="submit">
+        Salvar Reserva
+       </button>
+       <button class="btn-secondary" id="back-from-reservation" type="button">
+        Voltar
+       </button>
+      </form>
+     </div>
+    </section>
+   </main>
+   <div class="modal" id="modal">
+    <div class="modal-content">
+     <span class="close">
+      &times;
+     </span>
+     <div id="modal-message">
+     </div>
+     <button class="btn-primary" id="modal-ok">
+      OK
+     </button>
+    </div>
+   </div>
+  </div>
+  <script src="app.js">
+  </script>
+  <script src="meus-dados.js">
+  </script>
+  <script>
+   document.addEventListener("DOMContentLoaded", function () {
+  const modal = document.getElementById("modal");
+  const closeModalBtn = document.querySelector("#modal .close");
+  const okBtn = document.getElementById("modal-ok");
+
+  if (closeModalBtn && modal) {
+    closeModalBtn.addEventListener("click", function () {
+      modal.style.display = "none";
+    });
+  }
+
+  if (okBtn && modal) {
+    okBtn.addEventListener("click", function () {
+      modal.style.display = "none";
+    });
+  }
+});
+  </script>
+ </body>
+</html>

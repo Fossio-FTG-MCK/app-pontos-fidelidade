@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Funcionamento do Sistema de Pontuação hotel Real</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    header {
+      background-color: #162231;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 5px solid #d0a95f;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+
+    .section {
+      background-color: white;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 900px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #162231;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .highlight {
+      background-color: #162231;
+      color: #d0a95f;
+      font-weight: bold;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      color: #999;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://kpjwznuthdnodfqgnidk.supabase.co/storage/v1/object/public/hotel-image//logo-hotel-real.png" alt="Logo Hotel Real" />
+    <h1>Programa de Pontuação - Hotel Real</h1>
+  </header>
+
+  <section class="section">
+    <h2>Como funciona</h2>
+    <p>
+      O sistema de pontuação do Hotel Real foi criado para <span class="highlight">valorizar e recompensar</span> clientes e colaboradores conforme suas interações com a plataforma.
+    </p>
+    <p>
+      A cada <span class="highlight">reserva confirmada</span>, os usuários acumulam pontos de forma automática. A quantidade de pontos gerados é baseada em três fatores:
+    </p>
+    <ul>
+      <li>O valor total da reserva</li>
+      <li>O tipo de usuário (cliente, cliente VIP, colaborador...)</li>
+      <li>A suíte escolhida (cada uma possui um fator de conversão)</li>
+    </ul>
+    <p>
+      Por exemplo, uma reserva na <span class="highlight">Suíte Master</span> pode gerar mais pontos do que uma Suíte Luxo, mesmo com valores similares, dependendo do fator configurado.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Como os pontos são computados</h2>
+    <p>
+      Após a finalização da reserva e o pagamento via Tap to Pay, o sistema recebe um retorno via webhook contendo os dados da transação. Com base nisso:
+    </p>
+    <ul>
+      <li>A reserva é validada automaticamente</li>
+      <li>O sistema verifica qual suíte foi reservada</li>
+      <li>É aplicada a configuração de pontuação correspondente</li>
+      <li>Os pontos são adicionados ao perfil do usuário</li>
+    </ul>
+    <p>
+      Tudo ocorre de forma <span class="highlight">segura e automática</span>, sem necessidade de ação manual.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Benefícios e resgates</h2>
+    <p>
+      Os pontos acumulados podem ser usados para <span class="highlight">resgatar benefícios</span>, como upgrades de quarto, descontos, brindes ou serviços especiais. O resgate é feito diretamente pelo sistema com base nos benefícios disponíveis.
+    </p>
+  </section>
+
+  <div class="footer">
+    Hotel Real &copy; 2025 - Sistema de Pontuação Automático
+  </div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parâmetros da URL de Retorno</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+
+    header {
+      background-color: #162231;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 5px solid #d0a95f;
+    }
+
+    header img {
+      width: 50px;
+      height: 50px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+
+    .section {
+      background-color: white;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 900px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      color: #162231;
+      margin-bottom: 10px;
+    }
+
+    p {
+      color: #444;
+      line-height: 1.6;
+    }
+
+    ul {
+      color: #444;
+      padding-left: 20px;
+    }
+
+    code {
+      display: block;
+      overflow-x: auto;
+      padding: 10px;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      font-size: 0.95rem;
+      color: #222;
+      word-wrap: break-word;
+    }
+
+    .highlight {
+      background-color: #162231;
+      color: #d0a95f;
+      font-weight: bold;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+
+    .footer {
+      text-align: center;
+      font-size: 14px;
+      color: #999;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://kpjwznuthdnodfqgnidk.supabase.co/storage/v1/object/public/hotel-image//logo-hotel-real.png" alt="Logo Hotel Real" />
+    <h1>Parâmetros da URL de Retorno - InfinitePay</h1>
+  </header>
+
+  <section class="section">
+    <h2>Objetivo</h2>
+    <p>
+      Esta página descreve os parâmetros que são enviados para o Hotel Real após a confirmação de pagamento pelo sistema InfinitePay. A URL de retorno é utilizada para registrar automaticamente a reserva e atribuir pontos ao cliente.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>Parâmetros esperados na URL</h2>
+    <p>Os seguintes dados são esperados como parâmetros da URL:</p>
+    <ul>
+      <li><span class="highlight">reserva_id</span> – ID único da reserva (obrigatório)</li>
+      <li><span class="highlight">suite_id</span> – ID único da suite (obrigatório)</li>
+      <li><span class="highlight">order_id</span> – ID do pedido na InfinitePay (obrigatório)</li>
+      <li><span class="highlight">nsu</span> – Número da transação (obrigatório)</li>
+      <li><span class="highlight">aut</span> – Código de autorização do pagamento (obrigatório)</li>
+      <li><span class="highlight">value</span> – Valor total pago (obrigatório, formato 999.99)</li>
+      <li><span class="highlight">nome</span> – Nome do cliente (obrigatório)</li>
+      <li><span class="highlight">email</span> – E-mail do cliente (obrigatório)</li>
+      <li><span class="highlight">whats</span> – WhatsApp do cliente (opcional)</li>
+      <li><span class="highlight">checkin</span> – Data de check-in (opcional)</li>
+      <li><span class="highlight">checkout</span> – Data de check-out (opcional)</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>Exemplo de URL completa</h2>
+    <code>
+      https://seusite.com/obrigado.html?reserva_id=reserva_20250420_12345&amp;suite_id=0320059e-f8a4-4581-9863-22cbe071292f&amp;order_id=1234&amp;nsu=ABC123&amp;aut=999888&amp;value=750.00&amp;nome=João%20Silva&amp;email=joao@example.com&amp;whats=5511999999999&amp;checkin=2025-04-20&amp;checkout=2025-04-23
+    </code>
+  </section>
+
+  <section class="section">
+    <h2>Importância dos dados</h2>
+    <p>
+      Os parâmetros obrigatórios são essenciais para registrar a transação com segurança e evitar duplicações. Os dados opcionais enriquecem o histórico da reserva e ajudam no atendimento ao cliente.
+    </p>
+  </section>
+
+  <div class="footer">
+    Hotel Real &copy; 2025 - Integração InfinitePay
+  </div>
+</body>
+</html>

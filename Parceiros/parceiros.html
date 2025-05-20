@@ -1,0 +1,108 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOTEL REAL CABO FRIO - Fidelidade</title>
+    <link rel="stylesheet" href="parceiros.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        
+
+            <section id="partners-section" class="active-section">
+                <div class="section-header">
+                    <button id="partners-back" class="back-button">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2 class="section-title">Parceiros</h2>
+                    <div style="width: 24px;"></div>
+                </div>
+                
+                <p class="section-description">Conheça nossos parceiros e troque seus pontos por produtos!</p>
+                
+                <div class="partners-list">
+                    <div class="partner-card">
+                        <div class="partner-logo">
+                            <img src="https://images.unsplash.com/photo-1514933651103-005eec06c04b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Restaurante Praia Azul">
+                        </div>
+                        <div class="partner-info">
+                            <div class="partner-name">Restaurante Praia Azul</div>
+                            <span class="new-tag">Novo parceiro</span>
+                        </div>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <div class="partner-logo">
+                            <img src="https://images.unsplash.com/photo-1520454974749-611b7248ffdb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Quiosque Pé na Areia">
+                        </div>
+                        <div class="partner-info">
+                            <div class="partner-name">Quiosque Pé na Areia</div>
+                        </div>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <div class="partner-logo">
+                            <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Bar do Mar">
+                        </div>
+                        <div class="partner-info">
+                            <div class="partner-name">Bar do Mar</div>
+                        </div>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <div class="partner-logo">
+                            <img src="https://images.unsplash.com/photo-1568254183919-78a4f43a2877?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Shopping Cabo Mall">
+                        </div>
+                        <div class="partner-info">
+                            <div class="partner-name">Shopping Cabo Mall</div>
+                            <span class="new-tag">Novo parceiro</span>
+                        </div>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <div class="partner-logo">
+                            <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Translado Executivo">
+                        </div>
+                        <div class="partner-info">
+                            <div class="partner-name">Translado Executivo</div>
+                        </div>
+                    </div>
+                    
+                    <div class="partner-card">
+                        <div class="partner-logo">
+                            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Spa Oceano">
+                        </div>
+                        <div class="partner-info">
+                            <div class="partner-name">Spa Oceano</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="manual-points-section">
+                <div class="card">
+                    <h2>Adicionar Código</h2>
+                    <form id="code-form">
+                        <div class="input-group">
+                            <label for="reservation-code">Código da Reserva</label>
+                            <input type="text" id="reservation-code" required>
+                        </div>
+                        <button type="submit" class="btn-primary">Validar</button>
+                        <button type="button" id="back-to-dashboard" class="btn-secondary">Voltar</button>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <div id="modal-message"></div>
+                <button id="modal-ok" class="btn-primary">OK</button>
+            </div>
+        </div>
+    </div>
+    <script src="parceiros.js"></script>
+</body>
+</html>

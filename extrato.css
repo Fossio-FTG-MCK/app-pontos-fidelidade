@@ -1,0 +1,45 @@
+
+.statement-timeline {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.statement-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.statement-icon {
+  font-size: 1.5rem;
+  color: #343a40;
+}
+
+.statement-details h4 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.statement-details p {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6c757d;
+}
+
+.statement-points {
+  margin-left: auto;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #28a745;
+}
+
+.statement-item.debit .statement-points {
+  color: #dc3545;
+}

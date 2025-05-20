@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Checkout de Reserva - InfinitePay</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- HEADER COMPLETO DO HOTEL REAL -->
+<style>
+  header {
+    background-color: #162231;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 5px solid #d0a95f;
+  }
+
+  header img {
+    width: 50px;
+    height: 50px;
+    display: block;
+    margin: 0 auto 10px auto;
+  }
+</style>
+
+<header>
+  <img src="https://kpjwznuthdnodfqgnidk.supabase.co/storage/v1/object/public/hotel-image//logo-hotel-real.png"
+       alt="Logo Hotel Real" />
+  <h1>Checkout de Reserva - InfinitePay</h1>
+</header>
+
+
+  <style>
+    body {
+      background-color: #f2f4f8;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    .checkout-wrapper {
+      max-width: 960px;
+      margin: 60px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+    }
+    .form-title {
+      text-align: center;
+      font-weight: bold;
+      margin-bottom: 30px;
+      color: #1a2634;
+    }
+    .form-section {
+      padding: 20px;
+      border-right: 1px solid #eee;
+    }
+    .preview-section {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 16px;
+    }
+    .qr-preview {
+      text-align: center;
+      width: 100%;
+    }
+    #qr-code-container {
+      width: 100%;
+      max-width: 400px;
+      min-width: 200px;
+      aspect-ratio: 1 / 1;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px dashed #ccc;
+      border-radius: 8px;
+      background-color: #f9f9f9;
+      position: relative;
+      text-align: center;
+    }
+    #qr-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #666;
+      font-size: 0.9rem;
+      max-width: 80%;
+      margin: 0 auto;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+    }
+    canvas#qr-code {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="checkout-wrapper">
+
+    <div class="row">
+      <div class="col-md-6 form-section">
+        <form id="checkout-form">
+          <div class="mb-3">
+            <label for="suite" class="form-label">Suíte</label>
+            <select class="form-select" id="suite" required>
+              <option value="">Carregando suítes...</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="checkin" class="form-label">Check-in</label>
+            <input type="date" class="form-control" id="checkin" required>
+          </div>
+          <div class="mb-3">
+            <label for="checkout" class="form-label">Check-out</label>
+            <input type="date" class="form-control" id="checkout" required>
+          </div>
+          <div class="mb-3">
+            <label for="customerName" class="form-label">Nome do Cliente</label>
+            <input type="text" class="form-control" id="customerName" required>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" class="form-control" id="email">
+          </div>
+          <div class="mb-3">
+            <label for="whatsapp" class="form-label">WhatsApp do Cliente</label>
+            <input type="tel" class="form-control" id="whatsapp">
+          </div>
+          <div class="mb-3">
+            <strong>Valor por diária: R$ <span id="valor-diaria">0,00</span></strong><br>
+            <strong>Valor total: R$ <span id="total-value">0,00</span></strong>
+          </div>
+          <button type="submit" class="btn btn-primary w-100">Montar Link</button>
+        </form>
+      </div>
+      <div class="col-md-6 preview-section">
+        <div id="checkout-result" class="w-100">
+          <label class="form-label">Link final:</label>
+          <div class="input-group mb-2">
+            <input type="text" class="form-control" id="checkoutLink" readonly>
+            <button class="btn btn-outline-secondary" onclick="copyLink()">Copiar</button>
+          </div>
+          <a href="#" id="whatsappLink" target="_blank" class="btn btn-success w-100">Enviar via WhatsApp</a>
+          <div class="qr-preview">
+            <div id="qr-code-container">
+              <div id="qr-placeholder">O QR Code será gerado após montar o link.</div>
+              <canvas id="qr-code"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script>
+    const suiteSelect = document.getElementById("suite");
+    const checkinInput = document.getElementById("checkin");
+    const checkoutInput = document.getElementById("checkout");
+    const totalSpan = document.getElementById("total-value");
+    const diariaSpan = document.getElementById("valor-diaria");
+    const qrCanvas = document.getElementById("qr-code");
+    const qrPlaceholder = document.getElementById("qr-placeholder");
+
+    let selectedData = null;
+
+    async function carregarSuites() {
+      const res = await fetch("https://kpjwznuthdnodfqgnidk.supabase.co/rest/v1/suites?select=*", {
+        headers: {
+          apikey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtwand6bnV0aGRub2RmcWduaWRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4MDcxMjcsImV4cCI6MjA1OTM4MzEyN30.8rtnknzowlYM393S_awylDyKHBG9P3cI2VrKgQwxqNU",
+          Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtwand6bnV0aGRub2RmcWduaWRrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDM4MDcxMjcsImV4cCI6MjA1OTM4MzEyN30.8rtnknzowlYM393S_awylDyKHBG9P3cI2VrKgQwxqNU"
+        }
+      });
+      const suites = await res.json();
+      suiteSelect.innerHTML = '<option value="">Selecione a suíte</option>';
+      suites.forEach(suite => {
+        const opt = document.createElement("option");
+        opt.value = JSON.stringify({
+          id: suite.id,
+          valor: suite.valor_base
+        });
+        opt.textContent = `${suite.nome} - ${suite.disponivel ? 'Disponível' : 'Indisponível'}`;
+        if (!suite.disponivel) opt.disabled = true;
+        suiteSelect.appendChild(opt);
+      });
+    }
+
+    function calcularDias(checkinStr, checkoutStr) {
+      const checkin = new Date(checkinStr);
+      const checkout = new Date(checkoutStr);
+      const diff = (checkout - checkin) / (1000 * 60 * 60 * 24);
+      return isNaN(diff) || diff < 1 ? 1 : diff;
+    }
+
+    function atualizarValores() {
+      if (!selectedData) return;
+      const checkin = checkinInput.value;
+      const checkout = checkoutInput.value;
+      const dias = calcularDias(checkin, checkout);
+      const valorTotal = (selectedData.valor || 0) * dias;
+      diariaSpan.textContent = selectedData.valor.toFixed(2).replace('.', ',');
+      totalSpan.textContent = valorTotal.toFixed(2).replace('.', ',');
+    }
+
+    suiteSelect.addEventListener("change", function () {
+      selectedData = JSON.parse(this.value || '{}');
+      atualizarValores();
+    });
+
+    checkinInput.addEventListener("change", atualizarValores);
+    checkoutInput.addEventListener("change", atualizarValores);
+
+    document.getElementById("checkout-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const name = document.getElementById("customerName").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const whatsapp = document.getElementById("whatsapp").value.trim();
+      const checkin = checkinInput.value;
+      const checkout = checkoutInput.value;
+
+      if (!selectedData || !selectedData.id || !selectedData.valor) {
+        alert("Selecione uma suíte válida.");
+        return;
+      }
+
+      const dias = calcularDias(checkin, checkout);
+      const valorTotal = (selectedData.valor || 0) * dias;
+
+      const dataNow = new Date();
+      const timePart = dataNow.getTime().toString().slice(-5);
+      const reservaId = `reserva_${dataNow.toISOString().split('T')[0].replace(/-/g, '')}_${timePart}`;
+
+      const baseUrl = new URL("https://infinitepay.io/pay");
+
+      baseUrl.searchParams.set("suite_id", selectedData.id);
+      baseUrl.searchParams.set("reserva_id", reservaId);
+      baseUrl.searchParams.set("value", valorTotal.toFixed(2));
+
+      baseUrl.searchParams.set("nome", name);
+      if (email) baseUrl.searchParams.set("email", email);
+      if (whatsapp) baseUrl.searchParams.set("whats", whatsapp);
+      if (checkin) baseUrl.searchParams.set("checkin", checkin);
+      if (checkout) baseUrl.searchParams.set("checkout", checkout);
+
+      const finalUrl = baseUrl.toString();
+
+      document.getElementById("checkoutLink").value = finalUrl;
+      document.getElementById("whatsappLink").href = `https://wa.me/55${whatsapp.replace(/\D/g, "")}?text=${encodeURIComponent("Olá, segue seu link de pagamento: " + finalUrl)}`;
+      document.getElementById("whatsappLink").style.display = whatsapp ? 'block' : 'none';
+
+      qrPlaceholder.style.display = 'none';
+      QRCode.toCanvas(qrCanvas, finalUrl, { width: 400 }, function () {});
+    });
+
+    function copyLink() {
+      const input = document.getElementById("checkoutLink");
+      input.select();
+      document.execCommand("copy");
+    }
+
+    const hoje = new Date();
+    const hojeStr = hoje.toISOString().split('T')[0];
+    checkinInput.value = hojeStr;
+
+    carregarSuites();
+  </script>
+</body>
+</html>

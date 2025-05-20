@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meus Dados</title>
+  <link rel="stylesheet" href="Meus_Dados.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+</head>
+<body>
+  <section id="profile-section" class="active-section">
+                <div class="section-header">
+                    <button id="profile-back" class="back-button">
+                        <i class="fas fa-arrow-left"></i>
+                    </button>
+                    <h2 class="section-title">Meus Dados</h2>
+                    <div style="width: 24px;"></div>
+                </div>
+                
+                <div class="profile-header">
+                    <h3 id="profile-greeting" class="greeting">Olá, Nome do Cliente!</h3>
+                    <p id="profile-points" class="points-summary">Saldo: 0 pontos</p>
+                    
+                    <div id="profile-qr-code" class="qr-code">
+                        <!-- QR code will be inserted here by JS -->
+                    </div>
+                </div>
+                
+                <div class="card profile-info-list">
+                    <div class="profile-info-item">
+                        <span class="profile-info-label">Nome</span>
+                        <span id="profile-name-value" class="profile-info-value">Não informado</span>
+                    </div>
+                    <div class="profile-info-item">
+                        <span class="profile-info-label">CPF</span>
+                        <span id="profile-cpf-value" class="profile-info-value">***.***-**</span>
+                    </div>
+                    <div class="profile-info-item">
+                        <span class="profile-info-label">Data de Nascimento</span>
+                        <span id="profile-birth-value" class="profile-info-value">Não informado</span>
+                    </div>
+                    <div class="profile-info-item">
+                        <span class="profile-info-label">Ocupação</span>
+                        <span id="profile-occupation-value" class="profile-info-value">Não informado</span>
+                    </div>
+                    <div class="profile-info-item">
+                        <span class="profile-info-label">Telefone</span>
+                        <span id="profile-phone-value" class="profile-info-value">Não informado</span>
+                    </div>
+                    <div class="profile-info-item">
+                        <span class="profile-info-label">E-mail</span>
+                        <span id="profile-email-value" class="profile-info-value">Não informado</span>
+                    </div>
+                    <div class="profile-info-item">
+                        <span class="profile-info-label">Endereço</span>
+                        <span id="profile-address-value" class="profile-info-value">Não informado</span>
+                    </div>
+                </div>
+                
+                <div class="card cards-section">
+                    <h3>Meus Cartões</h3>
+                    <button class="add-card-btn" id="add-card-btn">
+                        <i class="fas fa-plus-circle"></i>
+                        <span class="add-card-text">Cartão Abastecimento</span>
+                    </button>
+                </div>
+            </section>
+  <script src="Meus_Dados.js"></script>
+</body>
+</html>

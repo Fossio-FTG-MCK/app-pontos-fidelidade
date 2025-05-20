@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestão Hotel Real</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+    header {
+      background-color: #162231;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 5px solid #d0a95f;
+    }
+    header img {
+      width: 50px;
+      height: 50px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+    nav {
+      background: #d0a95f;
+      padding: 10px;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 15px;
+      color: #162231;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 12px;
+      border-radius: 4px;
+    }
+    nav a:hover {
+      background-color: #e6c982;
+    }
+    nav a:active {
+      background-color: #b6933f;
+    }
+    nav a.selected {
+      background-color: #162231;
+      color: #fff;
+    }
+    main {
+      max-width: 960px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
+    }
+    section {
+      display: none;
+    }
+    section.active {
+      display: block;
+    }
+    .form-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .form-header h2 {
+      margin: 0;
+      color: #162231;
+    }
+    .searchbox {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #162231;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0f1722;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://kpjwznuthdnodfqgnidk.supabase.co/storage/v1/object/public/hotel-image//logo-hotel-real.png" alt="Logo Hotel Real">
+    <h1>Gestão Hotel Real</h1>
+  </header>
+
+  <nav>
+    <a href="#home" class="selected">Home</a>
+    <a href="#vouchers">Vouchers</a>
+    <a href="#parceiros">Parceiros</a>
+    <a href="#beneficios">Benefícios</a>
+    <a href="#suites">Suítes</a>
+  </nav>
+
+  <main>
+    <section id="home" class="active">
+      <h2>Bem-vindo ao Painel de Gestão</h2>
+      <p>Use o menu acima para navegar entre os módulos do sistema. Aqui você pode adicionar vouchers, parceiros, benefícios e gerenciar as suítes disponíveis no Hotel Real.</p>
+    </section>
+
+    <section id="vouchers">
+  <div class="form-header">
+    <h2>Adicionar Vouchers</h2>
+    <input class="searchbox" type="text" placeholder="Buscar voucher para editar..." id="search-voucher" />
+  </div>
+  <form id="form-vouchers">
+    <label for="titulo-voucher">Título</label>
+    <input type="text" name="titulo" id="titulo-voucher" required>
+
+    <label for="pontos-voucher">Pontos</label>
+    <input type="number" name="pontos" id="pontos-voucher" required>
+
+    <label for="status-voucher">Status</label>
+    <select name="status" id="status-voucher">
+      <option value="ativo">Ativo</option>
+      <option value="inativo">Inativo</option>
+    </select>
+
+    <label for="usado-em-voucher">Usado em</label>
+    <input type="datetime-local" name="usado_em" id="usado-em-voucher">
+
+    <label for="usuario-id-voucher">Usuário ID</label>
+    <input type="text" name="usuario_id" id="usuario-id-voucher">
+
+    <label for="parceiro-id-voucher">Parceiro ID</label>
+    <input type="text" name="parceiro_id" id="parceiro-id-voucher">
+
+    <button type="submit">Salvar Voucher</button>
+  </form>
+</section>
+
+<section id="parceiros">
+  <div class="form-header">
+    <h2>Adicionar Parceiro</h2>
+    <input class="searchbox" type="text" placeholder="Buscar parceiro para editar..." id="search-parceiro" />
+  </div>
+  <form id="form-parceiros">
+    <label for="nome-parceiro">Nome</label>
+    <input type="text" name="nome" id="nome-parceiro" required>
+
+    <label for="logo-parceiro">Logo (URL)</label>
+    <input type="text" name="logo" id="logo-parceiro">
+
+    <label for="banner-parceiro">Banner (URL)</label>
+    <input type="text" name="banner" id="banner-parceiro">
+
+    <label for="descricao-parceiro">Descrição</label>
+    <textarea name="descricao" id="descricao-parceiro"></textarea>
+
+    <label for="telefone-parceiro">Telefone</label>
+    <input type="text" name="telefone" id="telefone-parceiro">
+
+    <label for="email-parceiro">Email</label>
+    <input type="email" name="email" id="email-parceiro">
+
+    <label for="endereco-parceiro">Endereço</label>
+    <input type="text" name="endereco" id="endereco-parceiro">
+
+    <label for="site-parceiro">Site</label>
+    <input type="text" name="site" id="site-parceiro">
+
+    <label for="instagram-parceiro">Instagram</label>
+    <input type="text" name="instagram" id="instagram-parceiro">
+
+    <label for="facebook-parceiro">Facebook</label>
+    <input type="text" name="facebook" id="facebook-parceiro">
+
+    <label for="twitter-parceiro">Twitter</label>
+    <input type="text" name="twitter" id="twitter-parceiro">
+
+    <label for="url_imagens-parceiro">Fotos (URL) use virgula para separar (,)</label>
+    <input type="text" name="url_imagen-parceiros" id="url_imagens-parceiro">
+
+    <label for="novo-parceiro">Novo</label>
+    <select name="novo" id="novo-parceiro">
+      <option value="false">Não</option>
+      <option value="true">Sim</option>
+    </select>
+
+    <button type="submit">Salvar Parceiro</button>
+  </form>
+</section>
+
+<section id="beneficios">
+  <div class="form-header">
+    <h2>Adicionar Benefício</h2>
+    <input class="searchbox" type="text" placeholder="Buscar benefício para editar..." id="search-beneficio" />
+  </div>
+  <form id="form-beneficios">
+    <label for="titulo-beneficio">Título</label>
+    <input type="text" name="titulo" id="titulo-beneficio" required>
+
+    <label for="descricao-beneficio">Descrição</label>
+    <textarea name="descricao" id="descricao-beneficio"></textarea>
+
+    <label for="icone-beneficio">Ícone</label>
+    <input type="text" name="icone" id="icone-beneficio">
+
+    <label for="pontos-beneficio">Pontos Necessários</label>
+    <input type="number" name="pontos_necessarios" id="pontos-beneficio" required>
+
+    <label for="categoria-id-beneficio">Categoria ID</label>
+    <input type="text" name="categoria_id" id="categoria-id-beneficio">
+
+    <label for="url_imagens-beneficio">Fotos (URL) use virgula para separar (,)</label>
+    <input type="text" name="url_imagens-beneficio" id="url_imagens-beneficio">
+
+    <button type="submit">Salvar Benefício</button>
+  </form>
+</section>
+
+<section id="suites">
+  <div class="form-header">
+    <h2>Adicionar Suíte</h2>
+    <input class="searchbox" type="text" placeholder="Buscar suíte para editar..." id="search-suite" />
+  </div>
+  <form id="form-suites">
+    <label for="nome-suite">Nome</label>
+    <input type="text" name="nome" id="nome-suite" required>
+
+    <label for="descricao-suite">Descrição</label>
+    <textarea name="descricao" id="descricao-suite"></textarea>
+
+    <label for="capacidade-suite">Capacidade</label>
+    <input type="number" name="capacidade" id="capacidade-suite">
+
+    <label for="valor-suite">Valor Base</label>
+    <input type="number" step="0.01" name="valor_base" id="valor-suite">
+
+    <label for="disponivel-suite">Disponível</label>
+    <select name="disponivel" id="disponivel-suite">
+      <option value="true">Sim</option>
+      <option value="false">Não</option>
+    </select>
+
+    <button type="submit">Salvar Suíte</button>
+  </form>
+</section>
+  </main>
+
+  <script>
+    const navLinks = document.querySelectorAll('nav a');
+    const main = document.querySelector('main');
+    const homeSection = document.getElementById('home');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+
+        navLinks.forEach(l => l.classList.remove('selected'));
+        link.classList.add('selected');
+
+        const targetId = link.getAttribute('href').substring(1);
+        document.querySelectorAll('main section').forEach(section => {
+          section.classList.remove('active');
+        });
+
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) targetSection.classList.add('active');
+      });
+    });
+  </script>
+
+  <script src="workhotel.js"></script>
+</body>
+</html>
