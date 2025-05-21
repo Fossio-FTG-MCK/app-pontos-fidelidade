@@ -14,6 +14,13 @@ function fecharIframeModalCompletamente() {
   console.log("Modal iframe fechado via fecharIframeModalCompletamente.");
 }
 
+// Função global para ser chamada pelo iframe para solicitar o fechamento
+window.solicitarFechamentoDoModalIframe = function() {
+  console.log("Solicitação de fechamento recebida do iframe.");
+  pararScannerInternoDoIframe(); // Tenta parar o scanner antes de fechar tudo
+  fecharIframeModalCompletamente();
+};
+
 // Função global para ser chamada pelo iframe
 window.handleAddPoints = async function(codigo) {
   console.log("window.handleAddPoints chamado em dashboard.js com código:", codigo);
@@ -389,7 +396,7 @@ async function abrirModalIframe() {
   // Cria o iframe
   const iframe = document.createElement('iframe');
   iframe.id = 'iframe-modal';
-  iframe.src = 'inserir-escanear-cod.html';
+  iframe.src = 'pages/inserir-escanear-cod.html';
   iframe.style.position = 'fixed';
   iframe.style.top = '10%';
   iframe.style.left = '10%';

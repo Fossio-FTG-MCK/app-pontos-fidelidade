@@ -179,26 +179,16 @@
                 processarCodigo(codigoInput.value);
             });
 
-            startCameraBtn.addEventListener('click', () => {
-                if (html5QrCode) { // Se já está ativo, talvez parar e reiniciar ou apenas ignorar
-                    console.log("Scanner já iniciado ou tentando reiniciar.");
-                    // pararScanner(); // Opcional: parar antes de reiniciar
-                }
-                iniciarScanner();
-            });
-            
-            function fecharIframeModal() {
-                if (window.parent) {
-                    const iframeModal = window.parent.document.getElementById('iframe-modal');
-                    const backdrop = window.parent.document.getElementById('iframe-backdrop');
-                    const closeBtn = window.parent.document.querySelector('button[style*="background: #f00"]'); // Seletor para o botão X
-
-                    iframeModal?.remove();
-                    backdrop?.remove();
-                    closeBtn?.remove();
+            function solicitarFechamentoAoPai() {
+                pararScanner(); // Para o scanner localmente primeiro
+                if (window.parent && typeof window.parent.solicitarFechamentoDoModalIframe === 'function') {
+                    window.parent.solicitarFechamentoDoModalIframe();
+                } else {
+                    // Fallback caso a comunicação falhe (remove a si mesmo ou oculta)
+                    console.warn("Não foi possível chamar solicitarFechamentoDoModalIframe no pai. Ocultando iframe diretamente.");
+                    document.body.innerHTML = '<p style="text-align:center;padding-top:50px;">Fechando...</p>'; 
                 }
             }
-
 
             function iniciarScanner() {
                 if (html5QrCode && html5QrCode.isScanning) {
@@ -261,10 +251,7 @@
             closeButtonInside.textContent = 'Fechar Janela';
             closeButtonInside.className = 'btn-secondary'; // Reutiliza estilo
             closeButtonInside.style.marginTop = '10px';
-            closeButtonInside.onclick = () => {
-                 pararScanner(); // Garante que a câmera pare ao fechar
-                 fecharIframeModal();
-            };
+            closeButtonInside.onclick = solicitarFechamentoAoPai;
             document.querySelector('.container').appendChild(closeButtonInside);
 
         });
