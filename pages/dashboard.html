@@ -22,12 +22,8 @@
   <div class="card" id="dashboard-add-points">
     <h2>Adicionar Pontos</h2>
     <div class="add-points-options">
-      <button id="scan-code-btn" class="btn-action">
-        <i class="fas fa-qrcode"></i> Escanear Código
-      </button>
-      <button id="manual-points-btn" class="btn-action">
-        <i class="fas fa-plus-circle"></i> Adicionar Código
-      </button>
+      <button id="scan-code-btn" class="btn-action">Escanear Código</button>
+      <button id="manual-points-btn" class="btn-action">Adicionar Código</button>
       <button id="add-reservation-btn" class="btn-action" style="display: none;">
         <i class="fas fa-calendar-plus"></i> Nova Reserva
       </button>
@@ -67,24 +63,4 @@
     </div>
   </div>
 </section>
-
-<div id="inserir-codigo-modal" class="modal">
-  <div class="modal-content">
-    <h2>Adicionar Código</h2>
-    <div id="mensagem-validacao" class="form-label" style="display: none;"></div>
-    <label for="codigo-input" class="form-label">Código da Reserva</label>
-    <input type="text" id="codigo-input" class="form-control" placeholder="INSIRA O CÓDIGO" style="text-transform: uppercase;">
-    <div style="display: flex; gap: 12px; width: 100%; margin-top: 20px;">
-      <button id="validar-btn" class="btn-primary" style="flex: 1;">Validar</button>
-      <button onclick="fecharModal()" class="btn-secondary" style="flex: 1;">Voltar</button>
-    </div>
-    <button id="start-camera-btn" class="btn-secondary" style="margin-top: 20px; display: flex; align-items: center; gap: 8px;">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-        <path d="M10.5 1a.5.5 0 0 1 .416.223l.621.933H14a1 1 0 0 1 1 1v9.688a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3.156a1 1 0 0 1 1-1h2.463l.621-.933A.5.5 0 0 1 5.5 1h5zM2 3.156V4h12v-.844a.156.156 0 0 0-.156-.156H2.156A.156.156 0 0 0 2 3.156zM14 5H2v7.688c0 .086.07.156.156.156h11.688a.156.156 0 0 0 .156-.156V5zM8 6a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
-      </svg>
-      Ativar Câmera
-    </button>
-    <div id="qr-reader" style="width: 100%; margin-top: 20px; display: none;"></div>
-  </div>
-</div>
 

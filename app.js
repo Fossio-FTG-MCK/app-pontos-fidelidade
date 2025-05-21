@@ -256,3 +256,20 @@ if ('serviceWorker' in navigator) {
       });
   });
 }
+
+// Dentro de handleAddPoints ou função de sucesso em dashboard.js
+function fecharIframeModalCompletamente() {
+    document.getElementById('iframe-modal')?.remove();
+    document.getElementById('iframe-backdrop')?.remove();
+    // Se o botão de fechar externo tiver um ID ou classe específica, remova-o também.
+    // Exemplo, se o botão 'X' tiver um ID 'external-iframe-close-btn':
+    // document.getElementById('external-iframe-close-btn')?.remove(); 
+    // Ou, usando o seletor que usei antes para o botão X em inserir-escanear-cod.html
+     const closeBtn = document.querySelector('button[style*=\"background: #f00\"][style*=\"z-index: 10000\"]');
+     closeBtn?.remove();
+}
+
+// Após o sucesso da adição de pontos:
+// showModal("Pontos adicionados com sucesso!"); // ou similar
+// fecharIframeModalCompletamente();
+// await atualizarHistoricoPontos(userId); // etc.

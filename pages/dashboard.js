@@ -1,5 +1,68 @@
 // dashboard.js completo e corrigido
 
+// Helper function to close the iframe modal
+function fecharIframeModalCompletamente() {
+  document.getElementById('iframe-modal')?.remove();
+  document.getElementById('iframe-backdrop')?.remove();
+  // Remove o botão 'X' externo (ajuste o seletor se necessário)
+  // O botão 'X' é criado em abrirModalIframe e não tem ID, então precisamos de um seletor mais robusto ou adicionarmos um ID lá.
+  // Por enquanto, vamos tentar um seletor baseado no que foi feito em inserir-escanear-cod.html para fechar:
+  const closeBtn = document.querySelector('button[style*="z-index: 10000"]'); 
+  if (closeBtn && closeBtn.parentElement === document.body) { // Garante que é o botão certo
+      closeBtn.remove();
+  }
+  console.log("Modal iframe fechado via fecharIframeModalCompletamente.");
+}
+
+// Função global para ser chamada pelo iframe
+window.handleAddPoints = async function(codigo) {
+  console.log("window.handleAddPoints chamado em dashboard.js com código:", codigo);
+  
+  const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+  const user = sessionData?.session?.user;
+
+  if (sessionError || !user) {
+    console.error("Erro ao obter sessão ou usuário não logado:", sessionError);
+    showModal("Você precisa estar logado para adicionar pontos.");
+    fecharIframeModalCompletamente();
+    return;
+  }
+  const userId = user.id;
+
+  try {
+    // AQUI VOCÊ DEVE CHAMAR SUA FUNÇÃO SUPABASE PARA VALIDAR O CÓDIGO E ADICIONAR OS PONTOS
+    // Exemplo: const { data, error } = await supabase.rpc('validar_e_adicionar_pontos', { codigo_reserva: codigo, usuario_id: userId });
+    // if (error) throw error;
+    // const pontosAdicionados = data.pontos_adicionados; // Supondo que sua RPC retorne isso
+
+    // Simulação de sucesso para este exemplo:
+    console.log(`Simulando validação do código '${codigo}' para o usuário ID: ${userId}`);
+    const pontosAdicionados = 100; // Valor de exemplo
+    // Fim da simulação
+
+    if (pontosAdicionados > 0) {
+      // Atualiza a contagem de pontos na UI
+      const pointsEl = document.getElementById("points-count");
+      if (pointsEl) {
+        const currentPoints = parseInt(pointsEl.textContent) || 0;
+        pointsEl.textContent = currentPoints + pontosAdicionados;
+      }
+      
+      await atualizarHistoricoPontos(userId); // Atualiza o histórico de pontos
+      showModal(`Código "${codigo}" validado! ${pontosAdicionados} pontos foram adicionados.`);
+    } else {
+      // Se a RPC retornar 0 pontos ou um status de código inválido/já usado
+      showModal(`Código "${codigo}" não é válido ou já foi utilizado.`);
+    }
+
+  } catch (error) {
+    console.error("Erro ao validar/adicionar pontos:", error);
+    showModal(`Erro ao processar o código "${codigo}": ${error.message}`);
+  } finally {
+    fecharIframeModalCompletamente(); // Fecha o modal iframe em qualquer caso (sucesso ou erro)
+  }
+};
+
 async function carregarDashboard() {
   function showDebug(msg) {
     const el = document.getElementById("debug-log");
@@ -79,6 +142,22 @@ async function carregarDashboard() {
   });
 
   await carregarBeneficios(pontosUsuario);
+
+  // Configura os event listeners para os botões do modal AQUI, no final de carregarDashboard
+  const scanCodeBtn = document.getElementById("scan-code-btn");
+  const manualPointsBtn = document.getElementById("manual-points-btn");
+
+  if (scanCodeBtn) {
+    scanCodeBtn.addEventListener("click", abrirModalIframe);
+  } else {
+    console.warn("Botão 'scan-code-btn' não encontrado em carregarDashboard.");
+  }
+
+  if (manualPointsBtn) {
+    manualPointsBtn.addEventListener("click", abrirModalIframe);
+  } else {
+    console.warn("Botão 'manual-points-btn' não encontrado em carregarDashboard.");
+  }
 }
 
 async function atualizarHistoricoPontos(userId) {
@@ -338,9 +417,8 @@ async function abrirModalIframe() {
   closeBtn.style.cursor = 'pointer';
   closeBtn.style.zIndex = '10000';
   closeBtn.onclick = () => {
-    document.getElementById('iframe-modal')?.remove();
-    document.getElementById('iframe-backdrop')?.remove();
-    closeBtn.remove();
+    pararScannerInternoDoIframe();
+    fecharIframeModalCompletamente();
   };
 
   // Adiciona tudo no body
@@ -349,99 +427,16 @@ async function abrirModalIframe() {
   document.body.appendChild(closeBtn);
 }
 
-// INICIO NOVA FUNÇÃO
-
-document.addEventListener("DOMContentLoaded", () => {
-  carregarDashboard();
-
-  const scanCodeBtn = document.getElementById("scan-code-btn");
-  const manualPointsBtn = document.getElementById("manual-points-btn");
-  const validarBtn = document.getElementById("validar-btn");
-  const startCameraBtn = document.getElementById("start-camera-btn");
-  const inputCodigo = document.getElementById("codigo-input");
-  const mensagem = document.getElementById("mensagem-validacao");
-  const qrReader = document.getElementById("qr-reader");
-  let html5QrCode;
-
-  if (scanCodeBtn) {
-    scanCodeBtn.addEventListener("click", abrirModalIframe);
-  }
-
-  if (manualPointsBtn) {
-    manualPointsBtn.addEventListener("click", abrirModalIframe);
-  }
-
-  if (validarBtn) {
-    validarBtn.addEventListener("click", () => {
-      const codigo = inputCodigo.value.toUpperCase().trim();
-      validarCodigo(codigo);
-    });
-  }
-
-  if (startCameraBtn) {
-    startCameraBtn.addEventListener("click", iniciarScanner);
-  }
-
-  function mostrarMensagem(texto, tipo) {
-    mensagem.textContent = texto;
-    mensagem.style.background = tipo === 'erro' ? 'var(--accent)' : 'var(--primary-light)';
-    mensagem.style.color = tipo === 'erro' ? 'var(--primary-dark)' : 'var(--secondary)';
-    mensagem.style.display = 'block';
-    setTimeout(() => {
-      mensagem.style.display = 'none';
-    }, 3000);
-  }
-
-  function validarCodigo(codigo) {
-    if (codigo.length < 12) {
-      mostrarMensagem("Código muito curto", 'erro');
-      return;
-    }
-    const fCount = (codigo.match(/F/g) || []).length;
-    const ffCount = (codigo.match(/FF/g) || []).length;
-    if (fCount === 4 && ffCount >= 1) {
-      mostrarMensagem("Código válido", 'sucesso');
-      window.handleAddPoints(codigo);
-      fecharModal();
+// Função para tentar chamar o pararScanner dentro do iframe
+function pararScannerInternoDoIframe() {
+    const iframe = document.getElementById('iframe-modal');
+    if (iframe && iframe.contentWindow && typeof iframe.contentWindow.pararScannerGlobal === 'function') {
+        iframe.contentWindow.pararScannerGlobal();
+        console.log("Chamado pararScannerGlobal() dentro do iframe.");
     } else {
-      mostrarMensagem("Código inválido", 'erro');
+        console.warn("Não foi possível chamar pararScannerGlobal() no iframe. Ou o iframe/função não existe.");
     }
-  }
-
-  function fecharModal() {
-    document.getElementById("inserir-codigo-modal").style.display = "none";
-    pararScanner();
-  }
-
-  function iniciarScanner() {
-    if (html5QrCode) return;
-    qrReader.style.display = "block";
-    html5QrCode = new Html5Qrcode("qr-reader");
-    html5QrCode.start(
-      { facingMode: "environment" },
-      { fps: 10, qrbox: { width: 250, height: 250 } },
-      (qrCodeMessage) => {
-        validarCodigo(qrCodeMessage);
-      },
-      (errorMessage) => {}
-    ).catch((err) => {
-      mostrarMensagem("Erro ao acessar câmera", 'erro');
-    });
-  }
-
-  function pararScanner() {
-    if (html5QrCode) {
-      html5QrCode.stop().then(() => {
-        html5QrCode.clear();
-        html5QrCode = null;
-        qrReader.style.display = "none";
-      }).catch(() => {});
-    }
-  }
-
-  // Iniciar scanner ao carregar a página
-  iniciarScanner();
-});
+}
 
 window.carregarDashboard = carregarDashboard;
 window.abrirModalIframe = abrirModalIframe;

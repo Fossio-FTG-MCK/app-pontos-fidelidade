@@ -247,9 +247,6 @@
                 }
             }
 
-            // Expor a função para ser chamada pelo pai (dashboard.js)
-            window.pararScannerGlobal = pararScanner;
-
             // Modifica o botão da câmera para também parar o scanner
             startCameraBtn.addEventListener('click', () => {
                 if (html5QrCode && html5QrCode.isScanning) {
