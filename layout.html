@@ -1,0 +1,77 @@
+<!-- layout.html -->
+<div id="app">
+  <!-- Header -->
+  <header>
+    <div class="menu-icon" id="menu-icon">
+      <i class="fas fa-bars"></i>
+    </div>
+    <div class="logo">
+      <svg height="50" width="50">
+        <image
+          height="50"
+          width="50"
+          href="/midias/logo.png"
+        />
+      </svg>
+    </div>
+    <div class="notification-icon" id="notification-icon">
+      <i class="fas fa-bell"></i>
+      <span class="notification-badge" style="display: none;"></span>
+    </div>
+  </header>
+
+  <!-- Side Menu -->
+  <div id="side-menu" class="side-menu">
+    <div class="side-menu-header">
+      <div class="user-avatar">
+        <i class="fas fa-user"></i>
+      </div>
+      <div class="side-menu-user-info">
+        <h3 id="menu-user-name">Nome do Cliente</h3>
+        <p id="menu-user-level">Nível: Bronze</p>
+      </div>
+      <div class="close-menu" id="close-menu">
+        <i class="fas fa-times"></i>
+      </div>
+    </div>
+    <div class="side-menu-items">
+      <a id="menu-dashboard" href="#" class="menu-item" onclick="loadPage('dashboard')">
+        <i class="fas fa-home"></i><span>Início</span>
+      </a>
+      <a id="menu-parceiros" href="#" class="menu-item" onclick="loadPage('parceiros')">
+        <i class="fas fa-store"></i><span>Parceiros</span>
+      </a>
+      <a id="menu-vouchers" href="#" class="menu-item" onclick="loadPage('vouchers')">
+        <i class="fas fa-exchange-alt"></i><span>Vouchers</span>
+      </a>
+      <a id="menu-compras" href="#" class="menu-item" onclick="loadPage('compras')">
+        <i class="fas fa-shopping-cart"></i><span>Compras</span>
+      </a>
+      <a id="menu-extrato" href="#" class="menu-item" onclick="loadPage('extrato')">
+        <i class="fas fa-coins"></i><span>Extrato</span>
+      </a>
+      <a id="menu-meus-dados" href="#" class="menu-item" onclick="loadPage('meus-dados')">
+        <i class="fas fa-user"></i><span>Meus Dados</span>
+      </a>
+      <a id="menu-features" href="#" class="menu-item" onclick="loadPage('features')">
+        <i class="fas fa-qrcode"></i><span>Escanear</span>
+      </a>
+      <a id="menu-contato" href="#" class="menu-item" onclick="loadPage('contato')">
+        <i class="fas fa-phone"></i><span>Contato</span>
+      </a>
+      <a id="menu-ajuda" href="#" class="menu-item" onclick="loadPage('ajuda')">
+        <i class="fas fa-question-circle"></i><span>Ajuda</span>
+      </a>
+      <a id="menu-logout" href="#" class="menu-item">
+        <i class="fas fa-sign-out-alt"></i><span>Sair</span>
+      </a>
+    </div>
+  </div>
+  <div id="menu-overlay" class="menu-overlay"></div>
+
+  <!-- Main Content -->
+  <main id="main-content">
+    <!-- Carregado dinamicamente via app.js -->
+  </main>
+
+</div>

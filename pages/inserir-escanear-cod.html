@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validar Código</title>
+  <link rel="stylesheet" href="../style.css">
+  <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
+</head>
+<body>
+  <div id="inserir-codigo-modal" class="modal active">
+    <div class="modal-content">
+      <h2>Adicionar Código</h2>
+
+      <div id="mensagem-validacao" class="form-label" style="display: none;"></div>
+
+      <label for="codigo-input" class="form-label">Código da Reserva</label>
+      <input type="text" id="codigo-input" class="form-control" placeholder="INSIRA O CÓDIGO" style="text-transform: uppercase;">
+
+      <div style="display: flex; gap: 12px; width: 100%; margin-top: 20px;">
+        <button id="validar-btn" class="btn-primary" style="flex: 1;">Validar</button>
+        <button onclick="fecharModal()" class="btn-secondary" style="flex: 1;">Voltar</button>
+      </div>
+
+      <button id="start-camera-btn" class="btn-secondary" style="margin-top: 20px; display: flex; align-items: center; gap: 8px;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M10.5 1a.5.5 0 0 1 .416.223l.621.933H14a1 1 0 0 1 1 1v9.688a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V3.156a1 1 0 0 1 1-1h2.463l.621-.933A.5.5 0 0 1 5.5 1h5zM2 3.156V4h12v-.844a.156.156 0 0 0-.156-.156H2.156A.156.156 0 0 0 2 3.156zM14 5H2v7.688c0 .086.07.156.156.156h11.688a.156.156 0 0 0 .156-.156V5zM8 6a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/>
+        </svg>
+        Ativar Câmera
+      </button>
+
+      <div id="qr-reader" style="width: 100%; margin-top: 20px; display: none;"></div>
+    </div>
+  </div>
+
+  <script type="module" src="../app.js"></script>
+  <script type="module" src="./inserir-escanear-cod.js"></script>
+
+  <script>
+    const inputCodigo = document.getElementById("codigo-input");
+    const mensagem = document.getElementById("mensagem-validacao");
+    const qrReader = document.getElementById("qr-reader");
+    const startCameraBtn = document.getElementById("start-camera-btn");
+    let html5QrCode;
+
+    document.getElementById("validar-btn").addEventListener("click", () => {
+      const codigo = inputCodigo.value.toUpperCase().trim();
+      validarCodigo(codigo);
+    });
+
+    startCameraBtn.addEventListener("click", () => {
+      iniciarScanner();
+    });
+
+    function mostrarMensagem(texto, tipo) {
+      mensagem.textContent = texto;
+      mensagem.style.background = tipo === 'erro' ? 'var(--accent)' : 'var(--primary-light)';
+      mensagem.style.color = tipo === 'erro' ? 'var(--primary-dark)' : 'var(--secondary)';
+      mensagem.style.display = 'block';
+      setTimeout(() => {
+        mensagem.style.display = 'none';
+      }, 3000);
+    }
+
+    function validarCodigo(codigo) {
+      if (codigo.length < 12) {
+        mostrarMensagem("Código muito curto", 'erro');
+        return;
+      }
+      const fCount = (codigo.match(/F/g) || []).length;
+      const ffCount = (codigo.match(/FF/g) || []).length;
+      if (fCount === 4 && ffCount >= 1) {
+        mostrarMensagem("Código válido", 'sucesso');
+        window.handleAddPoints(codigo);
+        fecharModal();
+      } else {
+        mostrarMensagem("Código inválido", 'erro');
+      }
+    }
+
+    function fecharModal() {
+      document.getElementById("inserir-codigo-modal").style.display = "none";
+      pararScanner();
+    }
+
+    function iniciarScanner() {
+      if (html5QrCode) return;
+      qrReader.style.display = "block";
+      html5QrCode = new Html5Qrcode("qr-reader");
+      html5QrCode.start(
+        { facingMode: "environment" },
+        { fps: 10, qrbox: { width: 250, height: 250 } },
+        (qrCodeMessage) => {
+          validarCodigo(qrCodeMessage);
+        },
+        (errorMessage) => {}
+      ).catch((err) => {
+        mostrarMensagem("Erro ao acessar câmera", 'erro');
+      });
+    }
+
+    function pararScanner() {
+      if (html5QrCode) {
+        html5QrCode.stop().then(() => {
+          html5QrCode.clear();
+          html5QrCode = null;
+          qrReader.style.display = "none";
+        }).catch(() => {});
+      }
+    }
+
+    iniciarScanner();
+  </script>
+
+</body>
+</html>

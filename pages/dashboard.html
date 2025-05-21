@@ -1,0 +1,70 @@
+<div id="debug-log" style="display:none; background:#fff3cd; color:#856404; padding:10px; margin-bottom:10px; border:1px solid #ffeeba;"></div>
+
+
+
+<section id="dashboard-section" class="active-section">
+  <div class="profile-card" id="dashboard-profile-card">
+    <div class="user-info" id="dashboard-user-info">
+      <div class="user-avatar"><i class="fas fa-user"></i></div>
+      <div>
+        <h3 id="user-name"></h3>
+        <p id="user-level"></p>
+      </div>
+    </div>
+    <div class="points-display" id="dashboard-points-display">
+      <div class="points-circle">
+        <span id="points-count">0</span>
+      </div>
+      <p>Pontos acumulados</p>
+    </div>
+  </div>
+
+  <div class="card" id="dashboard-add-points">
+    <h2>Adicionar Pontos</h2>
+    <div class="add-points-options">
+      <button id="scan-code-btn" class="btn-action">
+        <i class="fas fa-qrcode"></i> Escanear Código
+      </button>
+      <button id="manual-points-btn" class="btn-action">
+        <i class="fas fa-plus-circle"></i> Adicionar Código
+      </button>
+      <button id="add-reservation-btn" class="btn-action" style="display: none;">
+        <i class="fas fa-calendar-plus"></i> Nova Reserva
+      </button>
+    </div>
+  </div>
+
+  <div class="card" id="dashboard-history">
+    <h2>Histórico de Pontos</h2>
+    <div id="points-history" class="history-list">
+      <!-- Preenchido via JS -->
+    </div>
+  </div>
+
+  <div class="card" id="dashboard-benefits">
+    <h2>Benefícios</h2>
+
+    <div class="tabs">
+      <div class="tab" id="tab-features">Destaques</div>
+      <div class="tab" id="tab-benefits">Benefícios</div>
+      <div class="tab" id="tab-reservations">Minhas Reservas</div>
+    </div>
+
+    <div id="content-features" class="tab-content">
+      <!-- Preenchido via JS -->
+    </div>
+
+    <div id="content-reservations" class="tab-content">
+      <div id="reservations-list" class="reservation-list">
+        <!-- Preenchido via JS -->
+      </div>
+    </div>
+
+    <div id="content-benefits" class="tab-content">
+      <div class="benefits-list" id="benefits-list">
+        <!-- Preenchido via JS -->
+      </div>
+    </div>
+  </div>
+</section>
+

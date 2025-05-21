@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>View Técnica - v_detalhes_webhook_reservas</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+    header {
+      background-color: #162231;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 5px solid #d0a95f;
+    }
+    header img {
+      width: 50px;
+      height: 50px;
+      display: block;
+      margin: 0 auto 10px auto;
+    }
+    main {
+      max-width: 960px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #162231;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #162231;
+      color: #fff;
+    }
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    .highlight {
+      background-color: #162231;
+      color: #d0a95f;
+      font-weight: bold;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://kpjwznuthdnodfqgnidk.supabase.co/storage/v1/object/public/hotel-image//logo-hotel-real.png" alt="Logo Hotel Real" />
+    <h1>View Técnica: <span class="highlight">v_detalhes_webhook_reservas</span></h1>
+  </header>
+  <main>
+    <h2>Campos da View</h2>
+    <p>Essa view consolida os dados recebidos via webhook após a confirmação de pagamento.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Campo</th>
+          <th>Tipo</th>
+          <th>Obrigatório</th>
+          <th>PK</th>
+          <th>Único</th>
+          <th>Tabela Relacionada</th>
+          <th>Campo Relacionado</th>
+          <th>Comentário</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>id</td><td>uuid</td><td>true</td><td>true</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>reserva_id</td><td>text</td><td>true</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>order_id</td><td>text</td><td>true</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>nsu</td><td>text</td><td>true</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>aut</td><td>text</td><td>false</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>valor_total</td><td>numeric</td><td>false</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>cliente_nome</td><td>text</td><td>false</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>cliente_email</td><td>text</td><td>false</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>cliente_whatsapp</td><td>text</td><td>false</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>checkin</td><td>date</td><td>false</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>checkout</td><td>date</td><td>false</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+        <tr><td>recebido_em</td><td>timestamp without time zone</td><td>false</td><td>false</td><td>false</td><td></td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </main>
+</body>
+</html>

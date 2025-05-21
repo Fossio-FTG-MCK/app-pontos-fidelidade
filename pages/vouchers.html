@@ -1,0 +1,48 @@
+<section id="vouchers-section" class="active-section">
+  <div class="section-header">
+    <h2 class="section-title">Vouchers</h2>
+    <div style="width: 24px;"></div>
+  </div>
+
+  <div class="my-points-box">
+    <div class="label">Meus pontos</div>
+    <div class="value" id="vouchers-points-value">0</div>
+  </div>
+
+  <div class="vouchers-content">
+    <h3>VOUCHERS</h3>
+
+    <div id="active-voucher-list" class="voucher-list">
+      <!-- Lista de vouchers ativos será inserida aqui via JS -->
+    </div>
+
+    <div class="empty-message" id="no-active-vouchers" style="display: none;">
+      <strong>Que pena!</strong>
+      Você não possui voucher válido.
+    </div>
+
+    <p class="suggestion-text">
+      Conheça nossos parceiros e acumule pontos para resgatar benefícios exclusivos.
+    </p>
+  </div>
+
+  <button class="btn-finished-vouchers">
+    Exibir Vouchers finalizados
+  </button>
+</section>
+
+<!-- Side Menu de Vouchers Finalizados -->
+<div id="finished-vouchers-sidemenu" class="finished-vouchers-sidemenu">
+  <div class="finished-vouchers-header">
+    <div class="finished-vouchers-title">Vouchers Finalizados</div>
+    <div class="close-finished-vouchers" id="close-finished-vouchers">
+      <i class="fas fa-times"></i>
+    </div>
+  </div>
+  <div class="finished-vouchers-content">
+    <div id="finished-vouchers-list">
+      <!-- Vouchers finalizados serão populados aqui via JS -->
+    </div>
+  </div>
+</div>
+<div id="finished-vouchers-overlay" class="finished-vouchers-overlay"></div>

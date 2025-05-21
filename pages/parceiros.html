@@ -1,0 +1,66 @@
+<section id="partners-section">
+    <div class="section-header">
+        <button id="partners-back" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h2 class="section-title">Parceiros</h2>
+        <div style="width: 24px;"></div>
+    </div>
+    <p class="section-description">Conheça nossos parceiros e troque seus pontos por produtos!</p>
+    <div class="partners-list" id="partners-list">
+        <!-- Parceiros serão preenchidos dinamicamente via JS -->
+    </div>
+</section>
+
+<section id="partner-profile-section">
+    <div class="section-header">
+        <button id="partner-profile-back" class="back-button">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+        <h2 class="section-title">Detalhes do Parceiro</h2>
+        <div style="width: 24px;"></div>
+    </div>
+
+    <div class="partner-profile-header">
+        <div class="partner-profile-name">
+            <span id="partner-profile-name"></span>
+            <span class="partner-status-tag" id="partner-status"></span>
+        </div>
+    </div>
+
+    <img id="partner-featured-image" src="" alt="Imagem do parceiro" class="partner-featured-image">
+
+    <div class="partner-nav">
+        <div class="partner-nav-button active" id="partner-nav-about">Sobre</div>
+    </div>
+
+    <div class="partner-about active" id="partner-about">
+        <p id="partner-description"></p>
+
+        <div class="partner-info-block">
+            <h4>Informações</h4>
+            <div class="partner-info-item">
+                <div class="partner-info-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div class="partner-info-text" id="partner-address"></div>
+            </div>
+            <div class="partner-info-item">
+                <div class="partner-info-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <div class="partner-info-text" id="partner-phone"></div>
+            </div>
+            <div class="partner-info-item">
+                <div class="partner-info-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="partner-info-text" id="partner-hours"></div>
+            </div>
+        </div>
+
+        <div class="map-placeholder">
+            <i class="fas fa-map-marked-alt" style="font-size: 2rem; color: #999;"></i>
+        </div>
+    </div>
+</section>

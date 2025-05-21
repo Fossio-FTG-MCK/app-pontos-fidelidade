@@ -1,0 +1,174 @@
+:root {
+  --primary: #1A2634;
+  --primary-dark: #141d29;
+  --primary-light: #3a4a60;
+  --menu-bg: #f3f4f6;
+  --border: #ddd;
+  --radius: 8px;
+}
+
+/* ----- Perfil e Header ----- */
+#profile-section {
+  padding: 20px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.greeting {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: var(--primary);
+}
+
+.points-summary {
+  font-weight: bold;
+  color: var(--primary-dark);
+  margin-bottom: 15px;
+}
+
+.qr-code {
+  width: 150px;
+  height: 150px;
+  background: #fff;
+  border: 2px solid var(--primary);
+  margin: 0 auto 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ----- Lista de Informações ----- */
+.profile-info-list {
+  margin-bottom: 20px;
+}
+
+.profile-info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.profile-info-item:last-child {
+  border-bottom: none;
+}
+
+.profile-info-label {
+  font-weight: 500;
+  color: var(--primary-light);
+}
+
+.profile-info-value {
+  color: #555;
+  text-align: right;
+}
+
+/* ----- Botão Editar Dados ----- */
+#editar-dados-btn {
+  display: block;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--radius);
+  font-size: 1rem;
+  font-weight: 500;
+  margin: 24px 0;
+  width: 100%;
+  text-align: left;
+}
+
+#editar-dados-btn:hover {
+  background-color: var(--primary-dark);
+}
+
+/* ----- Campo de edição ----- */
+.input-edicao {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 0.95rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  color: #333;
+}
+
+/* ----- Cartões Abastecimento ----- */
+.cards-section h3 {
+  color: var(--primary);
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.add-card-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--menu-bg);
+  border: 1px dashed var(--primary);
+  border-radius: var(--radius);
+  padding: 14px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.add-card-btn i {
+  font-size: 1.5rem;
+  color: var(--primary);
+}
+
+.add-card-text {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+/* ----- Cartão renderizado dinamicamente ----- */
+.abastecimento-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f8f9fb;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin-bottom: 10px;
+}
+
+.abastecimento-card i {
+  font-size: 1.3rem;
+  color: white;
+}
+
+/* ----- Header ----- */
+.back-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: var(--primary);
+  cursor: pointer;
+  padding: 4px;
+  display: none !important;
+  align-items: center;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 12px;
+}
+
+.section-title {
+  flex: 1;
+  font-size: 1.5rem;
+  color: var(--primary);
+  text-align: center;
+}
+
+.cards-section {
+  display: none !important;
+}
+

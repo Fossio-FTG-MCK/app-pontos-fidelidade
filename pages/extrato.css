@@ -1,0 +1,73 @@
+/* Extrato - statement.css (no padrão correto do seu app) */
+
+#statement-section {
+  background-color: var(--secondary);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.section-description {
+  font-size: 0.95rem;
+  color: #666;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.statement-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.statement-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--secondary);
+  padding: 16px;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 8px var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.statement-item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.statement-item-description {
+  font-weight: 500;
+  color: var(--primary-dark);
+  font-size: 1rem;
+  margin-bottom: 4px;
+}
+
+.statement-item-date {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.statement-item-points {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.statement-item-points.credito {
+  color: #28a745; /* Verde para créditos */
+}
+
+.statement-item-points.debito {
+  color: #dc3545; /* Vermelho para débitos */
+}

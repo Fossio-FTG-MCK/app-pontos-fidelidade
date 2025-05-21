@@ -1,0 +1,92 @@
+/* Estilos da seção de contato - ESCOPADOS PARA NÃO CONFLITAR COM O SISTEMA */
+
+#contact-section {
+  padding: 10px;
+}
+
+/* Título da seção */
+#contact-section .section-title {
+  flex: 1;
+  font-size: 1.5rem;
+  color: #1A2634; /* Escuro do tema */
+  text-align: center;
+}
+
+/* Botão de voltar */
+#contact-section .back-button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #1A2634;
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* Descrição da seção */
+#contact-section .section-description {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* Cartão com informações de contato */
+#contact-section .card.contact-info {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+}
+
+/* Cada método de contato */
+#contact-section .contact-method {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+#contact-section .contact-method:last-child {
+  border-bottom: none;
+}
+
+/* Ícones */
+#contact-section .contact-icon {
+  font-size: 1.5rem;
+  color: #C0A060; /* dourado */
+  margin-right: 15px;
+  width: 30px;
+  text-align: center;
+}
+
+/* Detalhes do contato */
+#contact-section .contact-detail {
+  flex: 1;
+}
+
+#contact-section .contact-detail h4 {
+  margin: 0;
+  margin-bottom: 5px;
+  color: #1A2634;
+}
+
+#contact-section .contact-detail p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #2A2E35;
+}
+
+/* Links de contato */
+#contact-section .contact-link {
+  color: #1A2634;
+  text-decoration: none;
+}
+
+#contact-section .contact-link:hover {
+  color: #C0A060;
+}
+
+#contact-back {
+  display: none !important;
+}
+

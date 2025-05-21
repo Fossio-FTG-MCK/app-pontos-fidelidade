@@ -1,0 +1,236 @@
+:root {
+    --dark-blue: #1A2634;
+    --gold: #C0A060;
+    --white: #FFFFFF;
+    --dark-gray: #2A2E35;
+    --light-gray: #F5F5F5;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --radius: 8px;
+    --spacing: 16px;
+}
+
+
+#partners-section, 
+#partner-profile-section {
+    background-color: var(--white);
+    color: var(--dark-gray);
+}
+
+section {
+    display: none;
+}
+
+.active-section {
+    display: block;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--dark-blue);
+    padding: 5px;
+    cursor: pointer;
+}
+
+.section-title {
+    flex: 1;
+    font-size: 1.5rem;
+    color: var(--dark-blue);
+    text-align: center;
+}
+
+.section-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.partners-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.partner-card {
+    display: flex;
+    align-items: center;
+    background-color: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    height: 80px;
+    cursor: pointer;
+}
+
+.partner-logo {
+    width: 80px;
+    height: 80px;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+}
+
+.partner-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.partner-info {
+    flex: 1;
+    padding: 15px 15px 15px 0;
+}
+
+.partner-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--dark-blue);
+}
+
+.new-tag {
+    display: inline-block;
+    background-color: #dc3545;
+    color: white;
+    font-size: 0.7rem;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-top: 3px;
+}
+
+#partner-profile-section {
+    display: none;
+}
+
+#partner-profile-section.active-section {
+    display: block;
+}
+
+.partner-profile-header {
+    background-color: var(--dark-blue);
+    padding: 15px;
+    color: var(--white);
+    border-radius: var(--radius) var(--radius) 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.partner-profile-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.partner-status-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    background-color: var(--gold);
+    color: var(--dark-blue);
+    padding: 3px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+}
+
+.partner-featured-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+}
+
+.partner-nav {
+    display: flex;
+    background-color: var(--light-gray);
+    border-bottom: 1px solid #ddd;
+}
+
+.partner-nav-button {
+    flex: 1;
+    text-align: center;
+    padding: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+}
+
+.partner-nav-button.active {
+    color: var(--dark-blue);
+}
+
+.partner-nav-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--dark-blue);
+}
+
+.partner-about {
+    display: none;
+    padding: 15px;
+    background-color: var(--white);
+}
+
+.partner-about.active {
+    display: block;
+}
+
+.partner-about p {
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.partner-info-block {
+    margin-bottom: 20px;
+}
+
+.partner-info-block h4 {
+    font-size: 1rem;
+    color: var(--dark-blue);
+    margin-bottom: 8px;
+}
+
+.partner-info-item {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.partner-info-icon {
+    color: var(--dark-blue);
+    width: 20px;
+    margin-right: 10px;
+}
+
+.partner-info-text {
+    flex: 1;
+    font-size: 0.9rem;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 150px;
+    background-color: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius);
+    margin-top: 15px;
+}
+
+#partners-section .back-button {
+    display: none;
+}

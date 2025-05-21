@@ -1,0 +1,70 @@
+<script type="module">
+  import { preencherPerfil } from './js/meus-dados.js';
+  preencherPerfil();
+</script>
+
+
+<section class="active-section" id="profile-section">
+  <div class="section-header">
+    <button class="back-button" onclick="loadPage('dashboard')">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <h2 class="section-title">Meus Dados</h2>
+    <div style="width: 24px;"></div>
+  </div>
+
+  <div class="profile-header">
+    <h3 class="greeting" id="profile-greeting">Olá, Cliente!</h3>
+    <p class="points-summary" id="profile-points">Saldo: 0 pontos</p>
+    <div class="qr-code" id="profile-qr-code"></div>
+  </div>
+
+  <div class="card profile-info-list">
+    <div class="profile-info-item">
+      <span class="profile-info-label">Nome</span>
+      <span class="profile-info-value" id="profile-name-value">—</span>
+    </div>
+    <div class="profile-info-item">
+      <span class="profile-info-label">CPF</span>
+      <span class="profile-info-value" id="profile-cpf-value">—</span>
+    </div>
+    <div class="profile-info-item">
+      <span class="profile-info-label">Nascimento</span>
+      <span class="profile-info-value" id="profile-birth-value">—</span>
+    </div>
+    <div class="profile-info-item">
+      <span class="profile-info-label">Telefone</span>
+      <span class="profile-info-value" id="profile-phone-value">—</span>
+    </div>
+    <div class="profile-info-item">
+      <span class="profile-info-label">E-mail</span>
+      <span class="profile-info-value" id="profile-email-value">—</span>
+    </div>
+  </div>
+
+  <button id="editar-dados-btn">Editar Dados</button>
+
+  <div class="card cards-section">
+    <h3>Meus Cartões</h3>
+    <button class="add-card-btn" id="add-card-btn">
+      <i class="fas fa-plus-circle"></i>
+      <span class="add-card-text">Cartão Abastecimento</span>
+    </button>
+  </div>
+
+  <div class="modal" id="add-card-modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" id="close-add-card-modal">&times;</span>
+      <h3>Adicionar Cartão Abastecimento</h3>
+      <p>Digite o código do cartão para vincular à sua conta:</p>
+      <form id="add-card-form">
+        <div class="input-group">
+          <input id="card-code" placeholder="INSERIR CÓDIGO" required type="text" />
+        </div>
+        <button class="btn-primary" type="submit">CONTINUAR</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+

@@ -1,0 +1,296 @@
+:root {
+  --dark-blue: #1A2634;
+  --gold: #C0A060;
+  --white: #FFFFFF;
+  --dark-gray: #2A2E35;
+  --light-gray: #F5F5F5;
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --radius: 8px;
+  --spacing: 16px;
+}
+
+/* Perfil */
+.profile-card {
+  background-color: var(--dark-blue);
+  color: var(--white);
+  border-radius: var(--radius);
+  padding: var(--spacing);
+  margin-bottom: var(--spacing);
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  background-color: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.user-avatar i {
+  font-size: 1.5rem;
+  color: var(--dark-blue);
+}
+
+/* Pontuação */
+.points-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.points-circle {
+  width: 90px;
+  height: 90px;
+  background-color: var(--gold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+#points-count {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--dark-blue);
+}
+
+/* Adicionar Pontos */
+.add-points-options {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-action {
+  flex: 1;
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+  background-color: var(--light-gray);
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-action i {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: var(--dark-blue);
+}
+
+/* Histórico */
+.history-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.history-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-item .date {
+  font-size: 0.8rem;
+  color: #777;
+}
+
+.history-item .points {
+  font-weight: 500;
+}
+
+.points-positive {
+  color: #28a745;
+}
+
+.points-negative {
+  color: #dc3545;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 15px;
+}
+
+.tab {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--dark-gray);
+  position: relative;
+}
+
+.tab.active {
+  color: var(--dark-blue);
+}
+
+.tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--dark-blue);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* Benefícios */
+.benefits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: var(--radius);
+}
+
+.benefit-icon {
+  width: 40px;
+  height: 40px;
+  background-color: var(--light-gray);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}
+
+.benefit-icon i {
+  color: var(--dark-blue);
+  font-size: 1.2rem;
+}
+
+.benefit-info {
+  flex: 1;
+}
+
+.benefit-info p {
+  font-size: 0.8rem;
+  color: var(--gold);
+}
+
+.btn-redeem {
+  background-color: var(--gold);
+  color: var(--dark-blue);
+  border: none;
+  padding: 8px 12px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: opacity 0.3s, background-color 0.3s;
+}
+
+.btn-redeem:hover:not(:disabled) {
+  background-color: #d4b474;
+}
+
+.btn-redeem:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* Reservas */
+.reservation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.reservation-item {
+  border: 1px solid #eee;
+  border-radius: var(--radius);
+  padding: 15px;
+  background-color: #f9f9f9;
+}
+
+.reservation-dates {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.reservation-room {
+  font-weight: 600;
+  color: var(--dark-blue);
+  margin-bottom: 5px;
+}
+
+.reservation-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.reservation-status {
+  font-size: 0.8rem;
+  padding: 3px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.status-completed {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status-upcoming {
+  background-color: #e3f2fd;
+  color: #1565c0;
+}
+
+.status-cancelled {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.whatsapp-button {
+  margin-left: auto;
+  color: #25D366;
+  font-size: 18px;
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+#add-reservation-btn {
+  display: none !important;
+}
+
