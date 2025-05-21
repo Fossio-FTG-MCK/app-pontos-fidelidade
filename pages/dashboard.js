@@ -4,11 +4,8 @@
 function fecharIframeModalCompletamente() {
   document.getElementById('iframe-modal')?.remove();
   document.getElementById('iframe-backdrop')?.remove();
-  // Remove o botão 'X' externo (ajuste o seletor se necessário)
-  // O botão 'X' é criado em abrirModalIframe e não tem ID, então precisamos de um seletor mais robusto ou adicionarmos um ID lá.
-  // Por enquanto, vamos tentar um seletor baseado no que foi feito em inserir-escanear-cod.html para fechar:
   const closeBtn = document.querySelector('button[style*="z-index: 10000"]'); 
-  if (closeBtn && closeBtn.parentElement === document.body) { // Garante que é o botão certo
+  if (closeBtn && closeBtn.parentElement === document.body) {
       closeBtn.remove();
   }
   console.log("Modal iframe fechado via fecharIframeModalCompletamente.");
@@ -17,7 +14,6 @@ function fecharIframeModalCompletamente() {
 // Função global para ser chamada pelo iframe para solicitar o fechamento
 window.solicitarFechamentoDoModalIframe = function() {
   console.log("Solicitação de fechamento recebida do iframe.");
-  pararScannerInternoDoIframe(); // Tenta parar o scanner antes de fechar tudo
   fecharIframeModalCompletamente();
 };
 
@@ -423,26 +419,14 @@ async function abrirModalIframe() {
   closeBtn.style.fontSize = '20px';
   closeBtn.style.cursor = 'pointer';
   closeBtn.style.zIndex = '10000';
-  closeBtn.onclick = () => {
-    pararScannerInternoDoIframe();
-    fecharIframeModalCompletamente();
+  closeBtn.onclick = () => { 
+    fecharIframeModalCompletamente(); 
   };
 
   // Adiciona tudo no body
   document.body.appendChild(backdrop);
   document.body.appendChild(iframe);
   document.body.appendChild(closeBtn);
-}
-
-// Função para tentar chamar o pararScanner dentro do iframe
-function pararScannerInternoDoIframe() {
-    const iframe = document.getElementById('iframe-modal');
-    if (iframe && iframe.contentWindow && typeof iframe.contentWindow.pararScannerGlobal === 'function') {
-        iframe.contentWindow.pararScannerGlobal();
-        console.log("Chamado pararScannerGlobal() dentro do iframe.");
-    } else {
-        console.warn("Não foi possível chamar pararScannerGlobal() no iframe. Ou o iframe/função não existe.");
-    }
 }
 
 window.carregarDashboard = carregarDashboard;
