@@ -38,7 +38,9 @@ function showModal(message) {
 function hideModal() {
   const modal = document.getElementById("modal");
   modal.classList.remove("active");
-  modal.style.display = 'none';
+  modal.style.display = "none";
+  const menuOverlay = document.getElementById("menu-overlay");
+  if (menuOverlay) menuOverlay.style.display = "none";
 }
 
 // Aguarda layout carregado

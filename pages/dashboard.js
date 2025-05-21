@@ -254,7 +254,7 @@ function renderBeneficio(item, pontosUsuario) {
   if (podeResgatar) {
     button.addEventListener("click", async () => {
       // Alerta customizado de confirmação
-      showModal(`<b>Deseja realmente resgatar este benefício?</b><br><br><strong>${item.titulo}</strong><br>${item.pontos_necessarios} pontos serão descontados.<br><br><button id='confirm-resgate' style='margin:10px 0 0 0;padding:8px 18px;background:#28a745;color:#fff;border:none;border-radius:6px;font-weight:600;cursor:pointer;'>Confirmar</button>`);
+      showModal(`<b>Deseja realmente resgatar este benefício?</b><br><br><strong>${item.titulo}</strong><br>${item.pontos_necessarios} pontos serão descontados.<br><br><button id='confirm-resgate' style='margin:10px 0 0 0;padding:8px 18px;background:var(--primary);color:var(--secondary);border:none;border-radius:6px;font-weight:600;cursor:pointer;'>Confirmar</button>`);
       setTimeout(() => {
         const confirmBtn = document.getElementById('confirm-resgate');
         if (confirmBtn) {
@@ -354,9 +354,112 @@ async function abrirModalIframe() {
 document.addEventListener("DOMContentLoaded", () => {
   carregarDashboard();
 
-  document.getElementById("scan-code-btn")?.addEventListener("click", abrirModalIframe);
-  document.getElementById("manual-points-btn")?.addEventListener("click", abrirModalIframe);
+  const scanCodeBtn = document.getElementById("scan-code-btn");
+  const manualPointsBtn = document.getElementById("manual-points-btn");
+  const validarBtn = document.getElementById("validar-btn");
+  const startCameraBtn = document.getElementById("start-camera-btn");
+  const inputCodigo = document.getElementById("codigo-input");
+  const mensagem = document.getElementById("mensagem-validacao");
+  const qrReader = document.getElementById("qr-reader");
+  let html5QrCode;
+
+  if (scanCodeBtn) {
+    scanCodeBtn.addEventListener("click", abrirModalIframe);
+  }
+
+  if (manualPointsBtn) {
+    manualPointsBtn.addEventListener("click", abrirModalIframe);
+  }
+
+  if (validarBtn) {
+    validarBtn.addEventListener("click", () => {
+      const codigo = inputCodigo.value.toUpperCase().trim();
+      validarCodigo(codigo);
+    });
+  }
+
+  if (startCameraBtn) {
+    startCameraBtn.addEventListener("click", iniciarScanner);
+  }
+
+  function mostrarMensagem(texto, tipo) {
+    mensagem.textContent = texto;
+    mensagem.style.background = tipo === 'erro' ? 'var(--accent)' : 'var(--primary-light)';
+    mensagem.style.color = tipo === 'erro' ? 'var(--primary-dark)' : 'var(--secondary)';
+    mensagem.style.display = 'block';
+    setTimeout(() => {
+      mensagem.style.display = 'none';
+    }, 3000);
+  }
+
+  function validarCodigo(codigo) {
+    if (codigo.length < 12) {
+      mostrarMensagem("Código muito curto", 'erro');
+      return;
+    }
+    const fCount = (codigo.match(/F/g) || []).length;
+    const ffCount = (codigo.match(/FF/g) || []).length;
+    if (fCount === 4 && ffCount >= 1) {
+      mostrarMensagem("Código válido", 'sucesso');
+      window.handleAddPoints(codigo);
+      fecharModal();
+    } else {
+      mostrarMensagem("Código inválido", 'erro');
+    }
+  }
+
+  function fecharModal() {
+    document.getElementById("inserir-codigo-modal").style.display = "none";
+    pararScanner();
+  }
+
+  function iniciarScanner() {
+    if (html5QrCode) return;
+    qrReader.style.display = "block";
+    html5QrCode = new Html5Qrcode("qr-reader");
+    html5QrCode.start(
+      { facingMode: "environment" },
+      { fps: 10, qrbox: { width: 250, height: 250 } },
+      (qrCodeMessage) => {
+        validarCodigo(qrCodeMessage);
+      },
+      (errorMessage) => {}
+    ).catch((err) => {
+      mostrarMensagem("Erro ao acessar câmera", 'erro');
+    });
+  }
+
+  function pararScanner() {
+    if (html5QrCode) {
+      html5QrCode.stop().then(() => {
+        html5QrCode.clear();
+        html5QrCode = null;
+        qrReader.style.display = "none";
+      }).catch(() => {});
+    }
+  }
+
+  // Iniciar scanner ao carregar a página
+  iniciarScanner();
 });
 
 window.carregarDashboard = carregarDashboard;
 window.abrirModalIframe = abrirModalIframe;
+
+function showModal(message) {
+  const modal = document.getElementById("modal");
+  const msgEl = document.getElementById("modal-message");
+  msgEl.innerHTML = message;
+  modal.classList.add("active");
+  modal.style.display = 'block';
+  const okBtn = document.getElementById("modal-ok");
+  if (okBtn) {
+    okBtn.focus();
+    okBtn.onclick = hideModal;
+  }
+}
+
+function hideModal() {
+  document.getElementById("modal").classList.remove("active");
+  document.getElementById("modal").style.display = 'none';
+}
