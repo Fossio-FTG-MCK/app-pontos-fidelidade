@@ -34,7 +34,7 @@ async function carregarParceiros() {
   container.innerHTML = "";
 
   data.forEach(parceiro => {
-    const logoUrl = parceiro.logo || 'https://kpjwznuthdnodfqgnidk.supabase.co/storage/v1/object/public/hotel-image//parceirosempty.png';
+    const logoUrl = parceiro.logo || '/midias/logo-parceiros-empty.png';
     const card = document.createElement("div");
     card.className = "partner-card";
     card.dataset.id = parceiro.id;
@@ -43,7 +43,7 @@ async function carregarParceiros() {
       <div class="partner-logo">
         <img src="${logoUrl}" 
              alt="${parceiro.nome}" 
-             onerror="this.onerror=null; this.src='https://kpjwznuthdnodfqgnidk.supabase.co/storage/v1/object/public/hotel-image//parceirosempty.png'">
+             onerror="this.onerror=null; this.src='midias/logo-parceiros-empty.png'">
       </div>
       <div class="partner-info">
         <div class="partner-name">${parceiro.nome}</div>
@@ -70,7 +70,7 @@ async function carregarParceiros() {
 }
 
 function mostrarDetalhesParceiro(parceiro) {
-  const bannerUrl = parceiro.banner || 'https://kpjwznuthdnodfqgnidk.supabase.co/storage/v1/object/public/hotel-image//cabo-frio-rj.jpg';
+  const bannerUrl = parceiro.banner || '/midias/banner-parceiros-empty.png';
   document.getElementById("partner-profile-name").textContent = parceiro.nome;
   document.getElementById("partner-status").textContent = parceiro.email || "Contato disponível";
   document.getElementById("partner-featured-image").src = bannerUrl;
