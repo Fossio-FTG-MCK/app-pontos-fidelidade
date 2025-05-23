@@ -70,7 +70,7 @@ async function carregarParceiros() {
 }
 
 function mostrarDetalhesParceiro(parceiro) {
-  const bannerUrl = parceiro.banner || '/midias/banner-parceiros-empty.png';
+  const bannerUrl = parceiro.banner || 'midias/banner-parceiros-empty.png';
   document.getElementById("partner-profile-name").textContent = parceiro.nome;
   document.getElementById("partner-status").textContent = parceiro.email || "Contato disponível";
   document.getElementById("partner-featured-image").src = bannerUrl;
