@@ -34,7 +34,7 @@ async function carregarParceiros() {
   container.innerHTML = "";
 
   data.forEach(parceiro => {
-    const logoUrl = parceiro.logo || '/midias/logo-parceiros-empty.png';
+    const logoUrl = parceiro.logo || 'midias/logo-parceiros-empty.png';
     const card = document.createElement("div");
     card.className = "partner-card";
     card.dataset.id = parceiro.id;
@@ -43,7 +43,7 @@ async function carregarParceiros() {
       <div class="partner-logo">
         <img src="${logoUrl}" 
              alt="${parceiro.nome}" 
-             onerror="this.onerror=null; this.src='/midias/logo-parceiros-empty.png'">
+             onerror="this.onerror=null; this.src='midias/logo-parceiros-empty.png'">
       </div>
       <div class="partner-info">
         <div class="partner-name">${parceiro.nome}</div>
