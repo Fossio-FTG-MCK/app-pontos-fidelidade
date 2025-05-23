@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            width: 100%;
+        }
+        #qr-reader {
+            width: 100%;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        #result {
+            background: #e7f3ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Teste QR Code Reader</h2>
+        <button id="start-btn">Iniciar Scanner</button>
+        <button id="stop-btn" style="display: none;">Parar Scanner</button>
+        <div id="qr-reader" style="display: none;"></div>
+        <div id="result"></div>
+    </div>
+
+    <script src="https://unpkg.com/html5-qrcode@2.0.9/dist/html5-qrcode.min.js"></script>
+    <script>
+        let html5QrCode = null;
+        let isScanning = false;
+
+        const startBtn = document.getElementById('start-btn');
+        const stopBtn = document.getElementById('stop-btn');
+        const qrReaderDiv = document.getElementById('qr-reader');
+        const resultDiv = document.getElementById('result');
+
+        startBtn.addEventListener('click', async () => {
+            try {
+                qrReaderDiv.style.display = 'block';
+                startBtn.style.display = 'none';
+                stopBtn.style.display = 'block';
+
+                html5QrCode = new Html5Qrcode("qr-reader");
+
+                const qrCodeSuccessCallback = (decodedText, decodedResult) => {
+                    console.log(`QR Code detectado: ${decodedText}`);
+                    resultDiv.innerHTML = `<strong>Código detectado:</strong> ${decodedText}`;
+                    resultDiv.style.display = 'block';
+                    
+                    // Para o scanner após detectar
+                    stopScanner();
+                };
+
+                const config = { 
+                    fps: 10,
+                    qrbox: { width: 250, height: 250 }
+                };
+
+                const cameras = await Html5Qrcode.getCameras();
+                if (cameras && cameras.length) {
+                    let cameraId = cameras[0].id;
+                    
+                    // Tenta encontrar câmera traseira
+                    const rearCamera = cameras.find(camera => 
+                        camera.label.toLowerCase().includes('back') || 
+                        camera.label.toLowerCase().includes('environment')
+                    );
+                    
+                    if (rearCamera) {
+                        cameraId = rearCamera.id;
+                    }
+
+                    await html5QrCode.start(cameraId, config, qrCodeSuccessCallback);
+                    isScanning = true;
+                }
+            } catch (err) {
+                console.error("Erro ao iniciar:", err);
+                resultDiv.innerHTML = `<strong>Erro:</strong> ${err.message}`;
+                resultDiv.style.display = 'block';
+                resetButtons();
+            }
+        });
+
+        stopBtn.addEventListener('click', () => {
+            stopScanner();
+        });
+
+        function stopScanner() {
+            if (html5QrCode && isScanning) {
+                html5QrCode.stop().then(() => {
+                    console.log("Scanner parado");
+                    resetButtons();
+                }).catch(err => {
+                    console.error("Erro ao parar:", err);
+                    resetButtons();
+                });
+            } else {
+                resetButtons();
+            }
+        }
+
+        function resetButtons() {
+            isScanning = false;
+            qrReaderDiv.style.display = 'none';
+            startBtn.style.display = 'block';
+            stopBtn.style.display = 'none';
+        }
+    </script>
+</body>
+</html> 

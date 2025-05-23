@@ -2,12 +2,33 @@
 
 // Helper function to close the iframe modal
 function fecharIframeModalCompletamente() {
-  document.getElementById('iframe-modal')?.remove();
-  document.getElementById('iframe-backdrop')?.remove();
+  const modal = document.getElementById('iframe-modal');
+  const modalContainer = document.getElementById('iframe-modal-container');
+  const backdrop = document.getElementById('iframe-backdrop');
   const closeBtn = document.querySelector('button[style*="z-index: 10000"]'); 
-  if (closeBtn && closeBtn.parentElement === document.body) {
-      closeBtn.remove();
+
+  // Animação de saída
+  if (backdrop && modalContainer) {
+    backdrop.style.transition = 'opacity 0.2s ease';
+    modalContainer.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+    backdrop.style.opacity = '0';
+    modalContainer.style.opacity = '0';
+    modalContainer.style.transform = 'scale(0.9)';
+    
+    setTimeout(() => {
+      modal?.remove();
+      modalContainer?.remove();
+      backdrop?.remove();
+      closeBtn?.remove();
+    }, 200);
+  } else {
+    // Fallback - remove imediatamente se não houver elementos para animação
+    modal?.remove();
+    modalContainer?.remove();
+    backdrop?.remove();
+    closeBtn?.remove();
   }
+  
   console.log("Modal iframe fechado via fecharIframeModalCompletamente.");
 }
 
@@ -388,52 +409,159 @@ async function abrirModalIframe() {
   // Cria o fundo escuro (backdrop)
   const backdrop = document.createElement('div');
   backdrop.id = 'iframe-backdrop';
-  backdrop.style.position = 'fixed';
-  backdrop.style.top = '0';
-  backdrop.style.left = '0';
-  backdrop.style.width = '100vw';
-  backdrop.style.height = '100vh';
-  backdrop.style.backgroundColor = 'rgba(0,0,0,0.5)';
-  backdrop.style.zIndex = '9998';
+  backdrop.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(16, 36, 69, 0.8);
+    z-index: 9998;
+    backdrop-filter: blur(4px);
+  `;
+
+  // Cria o container do modal
+  const modalContainer = document.createElement('div');
+  modalContainer.id = 'iframe-modal-container';
+  modalContainer.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    padding: 20px;
+    box-sizing: border-box;
+  `;
 
   // Cria o iframe
   const iframe = document.createElement('iframe');
   iframe.id = 'iframe-modal';
   iframe.src = 'pages/inserir-escanear-cod.html';
-  iframe.style.position = 'fixed';
-  iframe.style.top = '10%';
-  iframe.style.left = '10%';
-  iframe.style.width = '80vw';
-  iframe.style.height = '80vh';
-  iframe.style.border = 'none';
-  iframe.style.zIndex = '9999';
-  iframe.style.borderRadius = '12px';
-  iframe.style.backgroundColor = '#fff';
-  iframe.style.boxShadow = '0px 0px 20px rgba(0,0,0,0.5)';
+  iframe.style.cssText = `
+    width: 100%;
+    height: 100%;
+    max-width: 500px;
+    max-height: 600px;
+    border: none;
+    border-radius: 12px;
+    background-color: #fff;
+    box-shadow: 0 8px 32px rgba(16, 36, 69, 0.2);
+    overflow: hidden;
+  `;
 
   // Cria botão de fechar
   const closeBtn = document.createElement('button');
-  closeBtn.textContent = 'X';
-  closeBtn.style.position = 'fixed';
-  closeBtn.style.top = '8%';
-  closeBtn.style.right = '8%';
-  closeBtn.style.width = '40px';
-  closeBtn.style.height = '40px';
-  closeBtn.style.background = '#f00';
-  closeBtn.style.color = '#fff';
-  closeBtn.style.border = 'none';
-  closeBtn.style.borderRadius = '50%';
-  closeBtn.style.fontSize = '20px';
-  closeBtn.style.cursor = 'pointer';
-  closeBtn.style.zIndex = '10000';
+  closeBtn.innerHTML = '×';
+  closeBtn.style.cssText = `
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    background: var(--primary, #102445);
+    color: var(--secondary, #fff);
+    border: none;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(16, 36, 69, 0.3);
+    transition: all 0.2s ease;
+  `;
+
+  closeBtn.onmouseover = () => {
+    closeBtn.style.background = 'var(--primary-light, #223b6f)';
+    closeBtn.style.transform = 'scale(1.1)';
+  };
+  
+  closeBtn.onmouseout = () => {
+    closeBtn.style.background = 'var(--primary, #102445)';
+    closeBtn.style.transform = 'scale(1)';
+  };
+
   closeBtn.onclick = () => { 
     fecharIframeModalCompletamente(); 
   };
 
-  // Adiciona tudo no body
+  // Fecha modal ao clicar no backdrop
+  backdrop.onclick = (e) => {
+    if (e.target === backdrop) {
+      fecharIframeModalCompletamente();
+    }
+  };
+
+  // Adiciona elementos na ordem correta
+  modalContainer.appendChild(iframe);
+  modalContainer.appendChild(closeBtn);
   document.body.appendChild(backdrop);
-  document.body.appendChild(iframe);
-  document.body.appendChild(closeBtn);
+  document.body.appendChild(modalContainer);
+
+  // Animação de entrada
+  requestAnimationFrame(() => {
+    backdrop.style.opacity = '0';
+    modalContainer.style.opacity = '0';
+    modalContainer.style.transform = 'scale(0.9)';
+    
+    requestAnimationFrame(() => {
+      backdrop.style.transition = 'opacity 0.3s ease';
+      modalContainer.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+      backdrop.style.opacity = '1';
+      modalContainer.style.opacity = '1';
+      modalContainer.style.transform = 'scale(1)';
+    });
+  });
+
+  // Responsividade para mobile
+  const mediaQuery = window.matchMedia('(max-width: 600px)');
+  
+  const handleMobileLayout = (e) => {
+    if (e.matches) {
+      // Mobile
+      modalContainer.style.cssText += `
+        padding: 10px;
+      `;
+      iframe.style.cssText += `
+        max-width: 100%;
+        max-height: 100%;
+        height: 90vh;
+      `;
+      closeBtn.style.cssText += `
+        top: 5px;
+        right: 5px;
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+      `;
+    } else {
+      // Desktop
+      modalContainer.style.cssText += `
+        padding: 20px;
+      `;
+      iframe.style.cssText += `
+        max-width: 500px;
+        max-height: 600px;
+        height: 100%;
+      `;
+      closeBtn.style.cssText += `
+        top: 15px;
+        right: 15px;
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+      `;
+    }
+  };
+
+  handleMobileLayout(mediaQuery);
+  mediaQuery.addListener(handleMobileLayout);
 }
 
 window.carregarDashboard = carregarDashboard;
