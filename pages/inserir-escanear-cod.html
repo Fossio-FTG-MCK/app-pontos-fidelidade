@@ -148,30 +148,25 @@
 
             function processarCodigo(codigo) {
                 codigo = codigo.toUpperCase().trim();
-                if (codigo.length < 12) {
-                    mostrarMensagem("Código muito curto", 'erro');
+                console.log("Código capturado no iframe:", codigo);
+                
+                if (!codigo) {
+                    mostrarMensagem("Nenhum código fornecido.", 'erro');
                     return;
                 }
-                // Lógica de validação (exemplo - precisa ser ajustada conforme a real)
-                const fCount = (codigo.match(/F/g) || []).length;
-                const ffCount = (codigo.match(/FF/g) || []).length;
-                
-                // Simulação da lógica de validação que estava em dashboard.js
-                // Idealmente, a validação robusta aconteceria no backend via Supabase.
-                // Esta é uma validação de exemplo no frontend.
-                if (fCount === 4 && ffCount >= 1) { // Ajuste esta lógica conforme necessário
-                    mostrarMensagem("Código válido: " + codigo, 'sucesso');
-                    if (window.parent && window.parent.handleAddPoints) {
-                        window.parent.handleAddPoints(codigo); // Envia para a página pai
-                        // Poderia fechar o iframe/modal aqui, mas a página pai pode querer fazer isso
-                    } else {
-                        mostrarMensagem("Erro ao comunicar com a página principal.", 'erro');
-                    }
-                    pararScanner(); // Para o scanner se estiver ativo
-                    // Fechar o modal pode ser feito pela página pai após addPoints
-                    // ou aqui: window.parent.document.getElementById('iframe-modal')?.remove(); ...
+
+                if (window.parent && typeof window.parent.handleAddPoints === 'function') {
+                    // Inform the user that the code is being processed by the parent.
+                    // The parent (dashboard.js) will handle the actual Supabase call,
+                    // display the final success/error message, and close the iframe.
+                    mostrarMensagem("Enviando código para validação...", 'info'); // Temporary message in iframe
+                    window.parent.handleAddPoints(codigo);
+                    
+                    // Do NOT call solicitarFechamentoAoPai() here.
+                    // The parent's handleAddPoints will call fecharIframeModalCompletamente().
                 } else {
-                    mostrarMensagem("Código inválido: " + codigo, 'erro');
+                    console.error("A função handleAddPoints não foi encontrada na janela pai.");
+                    mostrarMensagem("Erro de comunicação com a página principal. Não foi possível processar o código.", 'erro');
                 }
             }
 

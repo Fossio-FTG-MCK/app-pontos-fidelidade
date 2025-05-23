@@ -273,3 +273,22 @@ function fecharIframeModalCompletamente() {
 // showModal("Pontos adicionados com sucesso!"); // ou similar
 // fecharIframeModalCompletamente();
 // await atualizarHistoricoPontos(userId); // etc.
+
+async function usarPontos(codigo) {
+    console.log("Chamando RPC para usar pontos com código:", codigo);
+    try {
+        const { data, error } = await supabase.rpc('usar_pontos', { codigo_reserva: codigo });
+        console.log("Resposta da RPC:", data, error);
+
+        if (error) {
+            console.error('Erro ao usar pontos:', error.message);
+            mostrarMensagem("Erro ao ativar pontos: " + error.message, 'erro');
+        } else {
+            console.log('Pontos ativados com sucesso');
+            mostrarMensagem("Pontos ativados com sucesso!", 'sucesso');
+        }
+    } catch (err) {
+        console.error('Erro inesperado ao usar pontos:', err);
+        mostrarMensagem("Erro inesperado ao ativar pontos.", 'erro');
+    }
+}

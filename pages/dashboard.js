@@ -27,40 +27,47 @@ window.handleAddPoints = async function(codigo) {
   if (sessionError || !user) {
     console.error("Erro ao obter sessão ou usuário não logado:", sessionError);
     showModal("Você precisa estar logado para adicionar pontos.");
-    fecharIframeModalCompletamente();
+    fecharIframeModalCompletamente(); // Ensure modal is closed
     return;
   }
   const userId = user.id;
 
+  if (!codigo || typeof codigo !== 'string' || codigo.trim() === '') {
+    showModal("Código inválido ou não fornecido.");
+    fecharIframeModalCompletamente(); // Ensure modal is closed
+    return;
+  }
+
   try {
-    // AQUI VOCÊ DEVE CHAMAR SUA FUNÇÃO SUPABASE PARA VALIDAR O CÓDIGO E ADICIONAR OS PONTOS
-    // Exemplo: const { data, error } = await supabase.rpc('validar_e_adicionar_pontos', { codigo_reserva: codigo, usuario_id: userId });
-    // if (error) throw error;
-    // const pontosAdicionados = data.pontos_adicionados; // Supondo que sua RPC retorne isso
+    console.log(`Tentando usar pontos com o código '${codigo.trim()}' para o usuário ID: ${userId}`);
+    const { data: rpcData, error: rpcError } = await supabase.rpc('usar_pontos', { ponto_id: codigo.trim() });
 
-    // Simulação de sucesso para este exemplo:
-    console.log(`Simulando validação do código '${codigo}' para o usuário ID: ${userId}`);
-    const pontosAdicionados = 100; // Valor de exemplo
-    // Fim da simulação
-
-    if (pontosAdicionados > 0) {
-      // Atualiza a contagem de pontos na UI
-      const pointsEl = document.getElementById("points-count");
-      if (pointsEl) {
-        const currentPoints = parseInt(pointsEl.textContent) || 0;
-        pointsEl.textContent = currentPoints + pontosAdicionados;
-      }
-      
-      await atualizarHistoricoPontos(userId); // Atualiza o histórico de pontos
-      showModal(`Código "${codigo}" validado! ${pontosAdicionados} pontos foram adicionados.`);
+    if (rpcError) {
+        console.error("Erro na chamada RPC 'usar_pontos':", rpcError);
+        // Try to parse a more user-friendly message if available
+        let displayErrorMessage = `Erro ao processar o código "${codigo}": ${rpcError.message}`;
+        try {
+            const errorDetails = JSON.parse(rpcError.message);
+            if (errorDetails.message) {
+                displayErrorMessage = errorDetails.message; 
+            }
+        } catch (e) { /* Ignore parsing error, use original message */ }
+        showModal(displayErrorMessage);
     } else {
-      // Se a RPC retornar 0 pontos ou um status de código inválido/já usado
-      showModal(`Código "${codigo}" não é válido ou já foi utilizado.`);
+        // Assuming the RPC returns some data on success, or at least no error means success.
+        // The problem description mentioned the function 'usar_pontos' works,
+        // but not what it returns. We will assume success if no error.
+        console.log("RPC 'usar_pontos' executada com sucesso. Dados retornados:", rpcData);
+        
+        // It's important that the RPC itself handles point crediting and history logging.
+        // Here, we just update the UI based on the assumption that the backend did its job.
+        showModal(`Código "${codigo}" processado com sucesso!`);
+        await carregarDashboard(); // Recarrega dados do dashboard (incluindo pontos e histórico)
     }
 
   } catch (error) {
-    console.error("Erro ao validar/adicionar pontos:", error);
-    showModal(`Erro ao processar o código "${codigo}": ${error.message}`);
+    console.error("Erro inesperado ao chamar RPC 'usar_pontos':", error);
+    showModal(`Erro inesperado ao processar o código "${codigo}": ${error.message || 'Erro desconhecido'}`);
   } finally {
     fecharIframeModalCompletamente(); // Fecha o modal iframe em qualquer caso (sucesso ou erro)
   }
